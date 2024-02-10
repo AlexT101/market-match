@@ -42,7 +42,7 @@ const activeNav = (pathname: string) => {
     switch(pathname){
         case '/':
             return 0;
-        case '/preferences':   
+        case '/stocks':   
             return 1;
         case '/report':
             return 2;
