@@ -1,45 +1,136 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,700&display=swap');
 
 .body {
-  background-color: rgb(22, 22, 25);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: rgb(250, 250, 250);
-  font-family: "Roboto", sans-serif;
+    background-color: rgb(22, 22, 25);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: rgb(250, 250, 250);
+    font-family: "Roboto", sans-serif;
 }
 
 .container {
     display: flex;
-    width: 100%;
-    height: 100vh;
-    display: flex;
     justify-content: center;
     align-items: center;
-    gap: 50px;
+
+    @media only screen and (min-width: 800px) {
+        height: 100vh;
+        gap: 50px;
+    }
+
+    @media only screen and (max-width: 800px) {
+        gap: 20px;
+        flex-direction: column;
+        margin-bottom: 30px;
+    }
 }
 
 .stock {
-    width: 400px;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+
+    @media only screen and (max-width: 800px) {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
 }
 
-.stockChart {
-    background-color: rgb(36, 36, 36);
-    padding-top: 20px;
-    padding-bottom: 10px;
-    padding-right: 20px;
-    margin-bottom: 20px;
-    margin-top: 20px;
+.tiltLeft {
+    animation: 0.5s animLeft;
+}
+
+.tiltRight {
+    animation: 0.5s animRight;
+}
+
+@keyframes animRight {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(0.96) rotate3d(1, 1, 1, 8deg) translateX(30px);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+@keyframes animLeft {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(0.96) rotate3d(1, 1, 1, -8deg) translateX(-30px);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.lighten {
+    animation: 0.4s lightenAnim;
+}
+
+@keyframes lightenAnim {
+    0% {
+        background-color: rgb(46, 46, 46);
+    }
+    50% {
+        background-color: rgb(66, 66, 66);
+    }
+    100% {
+        background-color: rgb(46, 46, 46);
+    }
+}
+
+.stockSection {
     border-top: 1px solid rgb(66, 66, 66);
     border-bottom: 1px solid rgb(66, 66, 66);
+    background-color: rgb(36, 36, 36);
+    height: 310px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    padding-bottom: 30px;
+}
+
+.stockSection.data {
+    padding: 24px;
+    justify-content: center;
+    gap: 30px;
+}
+
+.stockSection.chart {
+    padding-top: 20px;
+    padding-right: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
+.toggle {
+    background-color: rgb(46, 46, 46);
+    border: 1px solid rgb(66, 66, 66);
+    color: rgb(200, 200, 200);
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: -50px;
+    margin-bottom: 10px;
+    align-self: center;
+}
+
+.toggle:hover {
+    background-color: rgb(66, 66, 66);
+}
+
 .stockChartTabs {
-   display: flex;
-   gap: 10px;
-   align-items: center;
+    display: flex;
+    gap: 10px;
+    align-items: center;
 }
 
 .arrow {
@@ -54,9 +145,34 @@
     align-items: center;
 }
 
+.desktopArrows {
+    @media only screen and (max-width: 800px) {
+        visibility: hidden;
+        width: 0;
+        height: 0;
+        margin: 0;
+        padding: 0;
+    }
+}
+
+.mobileArrows {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 40px;
+
+    @media only screen and (min-width: 800px) {
+        visibility: hidden;
+        width: 0;
+        height: 0;
+        margin: 0;
+        padding: 0;
+    }
+}
+
 .arrowLeft {
     padding-right: 3px;
 }
+
 .arrowRight {
     padding-left: 3px;
 }
