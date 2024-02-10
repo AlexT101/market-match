@@ -61,7 +61,7 @@ const getPrompt = () => {
 
 const Stock = () => {
     const [dayRange, setDayRange] = useState<string | null>('first'); //Day range of the graph
-    const [opened, setOpened] = useState(1); //Which info section is opened (graph, info, ai)
+    const [opened, setOpened] = useState(0); //Which info section is opened (graph, info, ai)
     const [showAnswer, setShowAnswer] = useState(false); //Whether to display the question or answer for the ai section
     const [prompt, setPrompt] = useState(getPrompt()); //Example user prompt in the text area
     const [question, setQuestion] = useState(""); //User question for ai
