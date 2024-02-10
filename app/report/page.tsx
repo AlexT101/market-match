@@ -70,13 +70,13 @@ const Report = () => {
 
     return (
         <main className="reportPage">
-            <Text size="xl"><b>Your Stock Report</b></Text>
-            <Text c="dimmed">Based on your preferences and swipes, we generated a list of stocks for you.*</Text>
+            <Text className="reportTitle"><b>Your Stock Report</b></Text>
+            <Text size="lg" c="dimmed">Based on your preferences and swipes, we generated a list of stocks for you.*</Text>
             <div className="reportButtonRow">
-            <Button color="indigo.6" mt="md" radius="md" mb="xl" onClick={exportReport}>
+            <Button size="md" color="indigo.6" mt="md" radius="md" mb="xl" onClick={exportReport}>
                 Download (.xlsx)
             </Button>
-            <Button color="indigo.6" mt="md" radius="md" component="a" href="/" mb="xl">
+            <Button size="md" color="indigo.6" mt="md" radius="md" component="a" href="/" mb="xl">
                 Return to Home
             </Button>
             </div>
@@ -85,7 +85,7 @@ const Report = () => {
                     <MiniStock key={index} name={stock.name} ticker={stock.ticker} data={stock.data} />
                 ))}
             </div>
-            <Text c="dimmed"><i>*This list is not meant to be financial advice. Please invest in stocks at your own discretion.</i></Text>
+            <Text size="lg" c="dimmed"><i>*This list is not meant to be financial advice. Please invest in stocks at your own discretion.</i></Text>
         </main>
     );
 }

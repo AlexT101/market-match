@@ -12,8 +12,8 @@ const MiniStock = ({name, ticker, data} : MiniStockProps) => {
     return (
         <div className="miniStock">
             <div className="miniStockStack">
-                <Text size="sm" c="dimmed">{ticker}</Text>
-                <Text>{name}</Text>
+                <Text size="md" c="dimmed">{ticker}</Text>
+                <Text size="lg">{name}</Text>
             </div>
             <Sparkline
                 w={120}

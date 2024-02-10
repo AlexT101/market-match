@@ -83,15 +83,15 @@ const Stock = () => {
     return (
         <Card id="stock" className="stock" shadow="sm" padding="lg" radius="md" withBorder>
             <Group justify="space-between">
-                <Text fw={800} size="lg">{name}</Text>
-                <Badge color="indigo.6" size="lg">{ticker}</Badge>
+                <Text fw={800} size="xl">{name}</Text>
+                <Badge color="indigo.6" size="xl">{ticker}</Badge>
             </Group>
-            <Text size="sm" c="dimmed">$150.22&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Tech Sector</Text>
+            <Text size="md" c="dimmed">$150.22&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Tech Sector</Text>
             <Card.Section>
                 {opened == 0 ? (
                     <Group className="stockSection chart">
                         <div className="stockChartTabs">
-                            <Text size="xs" c="dimmed">RANGE</Text>
+                            <Text size="sm" c="dimmed">RANGE</Text>
                             <Tabs value={dayRange} onChange={setDayRange}>
                                 <Tabs.List>
                                     <Tabs.Tab value="first" color="indigo.6">1D</Tabs.Tab>
@@ -178,7 +178,7 @@ const Stock = () => {
                 </Button>
             </div>
 
-            <Text size="sm" c="dimmed">
+            <Text size="md" c="dimmed">
                 {description}
             </Text>
 
