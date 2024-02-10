@@ -1,78 +1,55 @@
 'use client';
 
-import "../styles/index.css";
-import Arrow from '../components/Arrow';
-import Stock from '../components/Stock';
-import History from '../components/History';
-import Generate from '../components/Generate';
+import 'styles/index.css';
+import { Card, Text, TextInput, Select, MultiSelect, Checkbox, Button, Overlay } from '@mantine/core';
+import { useForm } from '@mantine/form';
+import { useState } from 'react';
 
-import { getStock } from '../utils/Utils';
-import { useEffect } from 'react';
+const Preferences = () => {
 
-export default function Home() {
-  useEffect(() => {
-    if (typeof window != undefined) {
-      document.onkeydown = arrowChecker;
+    const [submitted, setSubmitted] = useState(false);
+
+    const form = useForm({
+        initialValues: {
+            sector: [],
+            risk: [],
+            age: [],
+            size: [],
+            dividends: false
+        }
+    });
+
+    const submitPreferences = () => {
+        setSubmitted(true);
+        console.log(form.values);
     }
-  }, []);
 
-  function arrowChecker(e: any) {
-    e = e || window.event;
-    if (e.keyCode == '37') {
-      swipeLeft();
-      var element = document.getElementById("left");
-      element?.classList.remove("lighten");
-      setTimeout(() => {
-        element?.classList.add("lighten");
-      }, 0);
-    }
-    else if (e.keyCode == '39') {
-      swipeRight();
-      var element = document.getElementById("right");
-      element?.classList.remove("lighten");
-      setTimeout(() => {
-        element?.classList.add("lighten");
-      }, 0);
-    }
-  }
-
-  const swipeLeft = () => {
-    var element = document.getElementById("stock");
-    element?.classList.remove("tiltLeft");
-    element?.classList.remove("tiltRight");
-    setTimeout(() => {
-      element?.classList.add("tiltLeft");
-    }, 0);
-    console.log("swipe left");
-    getStock();
-  }
-
-  const swipeRight = () => {
-    var element = document.getElementById("stock");
-    element?.classList.remove("tiltLeft");
-    element?.classList.remove("tiltRight");
-    setTimeout(() => {
-      element?.classList.add("tiltRight");
-    }, 0);
-    console.log("swipe right");
-    getStock();
-  }
-
-  return (
-    <main className="container">
-      <div className="desktopArrows">
-        <Arrow name="left" onClick={swipeLeft} />
-      </div>
-      <Stock />
-      <div className="desktopArrows">
-        <Arrow name="right" onClick={swipeRight} />
-      </div>
-      <div className="mobileArrows">
-        <Arrow name="left" onClick={swipeLeft} />
-        <Arrow name="right" onClick={swipeRight} />
-      </div>
-      <History />
-      <Generate />
-    </main>
-  );
+    return (
+        <main className="preferenceContainer">
+            <div className="backgroundGradient"> 
+            <Text className="backgroundTitle">Stock Swipes</Text>
+            <Text className="backgroundSubtitle">Input your preferences, swipe left or right on some of the market's most popular investments, and get a curated list of stocks to research with our online web dashboard.</Text>
+            </div>
+            <Card className="preferenceBox" shadow="sm" padding="xl" radius="md" withBorder>
+                <Text fw={800} size="xl">Preferences</Text>
+                <Text size="md" c="dimmed">This data will be used to generate a list of stocks tailored to your preferences.</Text>
+                <MultiSelect size="md" data={['Energy', 'Materials', 'Industrials', 'Utilities', 'Healthcare', 'Financials', 'Consumer Discretionary', 'Consumer Staples', 'Information Technology', 'Communication Services', 'Real Estate']} className="fullWidth" label="Sector" placeholder="Select" radius="md"  {...form.getInputProps('sector')} />
+                <MultiSelect size="md" data={['Low Risk', 'Medium Risk', 'High Risk']} className="fullWidth" label="Risk Level" placeholder="Select" radius="md"  {...form.getInputProps('risk')} />
+                <MultiSelect size="md" data={['0-5 Years', '6-10 Years', '10-20 Years', '21+ Years']} className="fullWidth" label="Company Age" placeholder="Select" radius="md"  {...form.getInputProps('age')} />
+                <MultiSelect size="md" data={['Small', 'Medium', 'Large']} className="fullWidth" label="Company Age" placeholder="Select" radius="md"  {...form.getInputProps('size')} />
+                <Checkbox size="md" mt="sm" color="indigo.6" label="Limit to companies with dividends" {...form.getInputProps('dividends')} />
+                <Button size="md" fullWidth color="indigo.6" mt="lg" radius="md" onClick={submitPreferences}>Submit Preferences</Button>
+                {submitted &&
+                    <Overlay color="rgb(36, 36, 36)" backgroundOpacity={0.90} className="preferencesOverlay">
+                        <Text size="xl" c="white">Preferences Submitted!</Text>
+                        <Button size="md" fullWidth color="indigo.6" mt="lg" radius="md" component="a" href="/stocks">
+                            Go To Home
+                        </Button>
+                    </Overlay>
+                }
+            </Card>
+        </main>
+    )
 }
+
+export default Preferences;

@@ -6,7 +6,7 @@ const UpdatePreferences = () => {
         <Card className="box updatePreferences" shadow="sm" padding="lg" radius="md" withBorder>
             <Text fw={800} size="xl" className="boxTitle">Update Preferences</Text>
             <Text size="md" c="dimmed">Change your preferences and get a new list of stocks to review.</Text>
-            <Button color="indigo.6" fullWidth mt="md" radius="md" size="md" component="a" href="/preferences">
+            <Button color="indigo.6" fullWidth mt="md" radius="md" size="md" component="a" href="/">
                 Go to Preferences
             </Button>
         </Card>

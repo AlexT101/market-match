@@ -383,7 +383,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 40px;
+    padding: 60px;
+    margin-left: 80px;
+    @media only screen and (max-width: 900px){
+        margin-left: 0;
+        padding: 40px;
+    }
 }
 
 .reportTitle {
@@ -415,16 +420,58 @@
 }
 
 .preferenceContainer {
-    width: 100%;
+    width: calc(100%-80px);
+    margin-left: 80px;
+    padding: 40px;
     height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 50px;
+    @media only screen and (max-width: 900px) {
+        flex-direction: column;
+        gap: 20;
+        height: auto;
+        margin-left: 0;
+    }
+}
+
+.backgroundGradient {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    padding: 60px;
+    min-width: 300px;
+    max-width: 800px;
+    height: 585px;
+    border-radius: 16px;
+    background-color:hsla(266,100%,19%,1);
+    border: 1px solid rgb(66, 66, 66);
+    background-image:
+    radial-gradient(at 40% 20%, hsla(266,97%,14%,1) 0px, transparent 50%),
+    radial-gradient(at 80% 0%, hsla(279,97%,14%,1) 0px, transparent 50%),
+    radial-gradient(at 11% 68%, hsla(319,100%,9%,1) 0px, transparent 50%),
+    radial-gradient(at 80% 50%, hsla(281,97%,18%,1) 0px, transparent 50%),
+    radial-gradient(at 0% 100%, hsla(257,100%,3%,1) 0px, transparent 50%),
+    radial-gradient(at 80% 100%, hsla(270,100%,17%,1) 0px, transparent 50%),
+    radial-gradient(at 0% 0%, hsla(256,100%,3%,1) 0px, transparent 50%);   
+}
+
+.backgroundTitle {
+    color: rgb(255, 255, 255);
+    font-weight: 800;
+    font-size: 2.5em;
+}
+
+.backgroundSubtitle {
+    color: rgb(164, 164, 164);
+    font-size: 1em;
 }
 
 .preferenceBox {
+    min-width: 400px;
     width: 400px;
-    max-width: 500px;
     display: flex;
     flex-direction: column;
     background-color: rgb(36, 36, 36);

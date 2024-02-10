@@ -8,7 +8,8 @@ import {
     IconForms,
     IconHome2,
     IconClipboardText,
-    IconGraph
+    IconGraph,
+    IconChartHistogram
 } from '@tabler/icons-react';
 import classes from 'styles//Navbar.module.css';
 import { useRouter } from 'next/navigation';
@@ -33,7 +34,7 @@ function NavbarLink({ icon: Icon, label, active, onClick }: NavbarLinkProps) {
 
 const mockdata = [
     { icon: IconHome2, label: 'Home', href: '/' },
-    { icon: IconForms, label: 'Preferences', href: '/preferences' },
+    { icon: IconChartHistogram, label: 'Stocks', href: '/stocks' },
     { icon: IconClipboardText, label: 'Report', href: 'report' },
 ];
 
