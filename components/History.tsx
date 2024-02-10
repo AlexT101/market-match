@@ -1,16 +1,75 @@
 import '../styles/index.css';
-import { Text } from '@mantine/core';
+import { Text, ScrollArea } from '@mantine/core';
 
 import HistoryCard from '../components/HistoryCard';
 
+const data = [
+    {
+        name: "Alphabet, Inc",
+        time: "12:05PM",
+        price: "$120.65",
+        direction: "left",
+    },
+    {
+        name: "Meta",
+        time: "12:05PM",
+        price: "$60.32",
+        direction: "right",
+    },
+    {
+        name: "Apple, Inc",
+        time: "12:05PM",
+        price: "$302.50",
+        direction: "left",
+    },
+    {
+        name: "Alphabet, Inc",
+        time: "12:05PM",
+        price: "$120.65",
+        direction: "left",
+    },
+    {
+        name: "Meta",
+        time: "12:05PM",
+        price: "$60.32",
+        direction: "right",
+    },
+    {
+        name: "Apple, Inc",
+        time: "12:05PM",
+        price: "$302.50",
+        direction: "left",
+    },
+    {
+        name: "Alphabet, Inc",
+        time: "12:05PM",
+        price: "$120.65",
+        direction: "left",
+    },
+    {
+        name: "Meta",
+        time: "12:05PM",
+        price: "$60.32",
+        direction: "right",
+    },
+    {
+        name: "Apple, Inc",
+        time: "12:05PM",
+        price: "$302.50",
+        direction: "left",
+    },
+
+];
+
 const History = () => {
     return (
-        <div className="historyContainer">
-            <HistoryCard name="Alphabet, Inc" time="12:05PM" price="$120.65" direction="left"/>
-            <HistoryCard name="Meta" time="12:02PM" price="$60.37" direction="right"/>
-            <HistoryCard name="Target" time="12:00PM" price="125.20" direction="left"/>
-
-        </div>
+        <ScrollArea className={"historyScroll" + ((data.length > 1) ? " fade" : "")}>
+            <div className="historyContainer">
+                {data.map((item, index) => (
+                    <HistoryCard key={index} name={item.name} time={item.time} price={item.price} direction={item.direction} />
+                ))}
+            </div>
+        </ScrollArea>
     )
 }
 
