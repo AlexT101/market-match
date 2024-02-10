@@ -4,6 +4,7 @@ import "../styles/index.css";
 import Arrow from '../components/Arrow';
 import Stock from '../components/Stock';
 import History from '../components/History';
+import Generate from '../components/Generate';
 
 import { getStock } from '../utils/Utils';
 import { useEffect } from 'react';
@@ -71,6 +72,7 @@ export default function Home() {
         <Arrow name="right" onClick={swipeRight} />
       </div>
       <History />
+      <Generate />
     </main>
   );
 }

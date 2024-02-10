@@ -1,5 +1,5 @@
 import '../styles/index.css';
-import { Text, ScrollArea } from '@mantine/core';
+import { ScrollArea } from '@mantine/core';
 
 import HistoryCard from '../components/HistoryCard';
 
