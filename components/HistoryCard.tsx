@@ -21,10 +21,10 @@ const HistoryCard = ({ name, time, price, direction }: HistoryCardProps) => {
                 }
             </div>
             <div className="historyTextStack">
-                <Text size="sm">{name}</Text>
-                <Text size="xs" c="dimmed">{time}</Text>
+                <Text size="md">{name}</Text>
+                <Text size="sm" c="dimmed">{time}</Text>
             </div>
-            <Text className="historyPrice" size="sm">{price}</Text>
+            <Text className="historyPrice" size="md">{price}</Text>
         </div>
     )
 }

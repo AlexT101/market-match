@@ -182,7 +182,7 @@ const Stock = () => {
                 {description}
             </Text>
 
-            <Button color="indigo.6" fullWidth mt="md" radius="md" component="a" href={"https://finance.yahoo.com/quote/" + ticker} target="_blank" rel="noopener noreferrer">
+            <Button size="md" color="indigo.6" fullWidth mt="md" radius="md" component="a" href={"https://finance.yahoo.com/quote/" + ticker} target="_blank" rel="noopener noreferrer">
                 Yahoo Finance Page
             </Button>
         </Card>

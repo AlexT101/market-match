@@ -74,7 +74,6 @@ export default function Home() {
       </div>
       <History />
       <Generate />
-      <UpdatePreferences />
     </main>
   );
 }

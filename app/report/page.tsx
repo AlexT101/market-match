@@ -71,7 +71,7 @@ const Report = () => {
     return (
         <main className="reportPage">
             <Text className="reportTitle"><b>Your Stock Report</b></Text>
-            <Text size="lg" c="dimmed">Based on your preferences and swipes, we generated a list of stocks for you.*</Text>
+            <Text size="lg" c="dimmed">Based on your preferences and swipes, we generated a list of stocks you might be interested in.*</Text>
             <div className="reportButtonRow">
             <Button size="md" color="indigo.6" mt="md" radius="md" mb="xl" onClick={exportReport}>
                 Download (.xlsx)

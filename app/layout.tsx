@@ -3,6 +3,7 @@ import "../styles/index.css";
 import '@mantine/core/styles.css';
 import '@mantine/charts/styles.css';
 import { MantineProvider, ColorSchemeScript } from "@mantine/core";
+import Navbar from '../components/Navbar';
 
 
 export const metadata: Metadata = {
@@ -27,6 +28,7 @@ export default function RootLayout({
       </head>
       <body className="body">
         <MantineProvider forceColorScheme="dark">
+          <Navbar/>
           {children}
         </MantineProvider>
       </body>

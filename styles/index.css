@@ -12,6 +12,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    @media only screen and (min-width: 700px) {
+        padding-right: 80px;
+    }
 
     @media only screen and (min-width: 1100px) {
         height: 100vh;
@@ -342,7 +345,7 @@
 
 .box.updatePreferences {
     @media only screen and (min-width: 1100px) {
-        left: 20px;
+        left: 100px;
         top: 20px;
     }
 }
