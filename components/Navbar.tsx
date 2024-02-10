@@ -1,7 +1,8 @@
 'use client';
 
-import { useState } from 'react';
-import { Center, Tooltip, UnstyledButton, Stack, rem } from '@mantine/core';
+import { useState, useEffect } from 'react';
+import { Center, Tooltip, UnstyledButton, Stack, rem, Modal, Text } from '@mantine/core';
+import { useDisclosure } from '@mantine/hooks';
 import {
     IconInfoCircle,
     IconForms,
@@ -11,6 +12,7 @@ import {
 } from '@tabler/icons-react';
 import classes from 'styles//Navbar.module.css';
 import { useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 
 interface NavbarLinkProps {
     icon: typeof IconHome2;
@@ -35,9 +37,28 @@ const mockdata = [
     { icon: IconClipboardText, label: 'Report', href: 'report' },
 ];
 
+const activeNav = (pathname: string) => {
+    switch(pathname){
+        case '/':
+            return 0;
+        case '/preferences':   
+            return 1;
+        case '/report':
+            return 2;
+    }
+    return 0;
+}
+
 const Navbar = () => {
-    const [active, setActive] = useState(0);
+    const pathname = usePathname();
+    const [active, setActive] = useState(activeNav(pathname));
     const router = useRouter();
+    const [opened, { open, close }] = useDisclosure(false);
+
+
+    useEffect(()=>{
+        setActive(activeNav(pathname));
+    },[pathname]);
 
     const links = mockdata.map((link, index) => (
         <NavbarLink
@@ -49,6 +70,7 @@ const Navbar = () => {
     ));
 
     return (
+        <>
         <nav className={classes.navbar}>
             <Center>
                 <IconGraph size={30}/>
@@ -61,9 +83,26 @@ const Navbar = () => {
             </div>
 
             <Stack justify="center" gap={0}>
-                <NavbarLink icon={IconInfoCircle} label="About" />
+                <NavbarLink icon={IconInfoCircle} label="About" onClick={open}/>
             </Stack>
         </nav>
+        <Modal
+        opened={opened}
+        onClose={close}
+        title="About"
+        centered
+        padding={24}
+        radius={16}
+        overlayProps={{
+          backgroundOpacity: 0.55,
+          blur: 3,
+        }}
+      >
+        <Text c="dimmed">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        </Text>
+      </Modal>
+        </>
     );
 }
 

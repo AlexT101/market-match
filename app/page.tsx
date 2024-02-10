@@ -5,7 +5,6 @@ import Arrow from '../components/Arrow';
 import Stock from '../components/Stock';
 import History from '../components/History';
 import Generate from '../components/Generate';
-import UpdatePreferences from '../components/UpdatePreferences';
 
 import { getStock } from '../utils/Utils';
 import { useEffect } from 'react';
