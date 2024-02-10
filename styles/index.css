@@ -99,12 +99,54 @@
     gap: 30px;
 }
 
+.stockSection.ai {
+    flex-direction: column;
+    padding-top: 20px;
+    padding-left: 24px;
+    padding-right: 24px;
+    gap: 0px;
+}
+
+.aiHeader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+}
+
+.textArea {
+    margin-top: 16px;
+    width: 100%;
+}
+
+.answerArea {
+    margin-top: 16px;
+    width: 100%;
+    background-color: rgb(26, 26, 26);
+    border-radius: 16px;
+    padding: 16px;
+}
+
+.stockAI {
+    font-weight: bold;
+    color: rgb(230, 230, 230);
+}
+
 .stockSection.chart {
     padding-top: 20px;
     padding-right: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.buttonRow {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-top: -50px;
+    margin-bottom: 10px;
+    align-self: center;
 }
 
 .toggle {
@@ -118,9 +160,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: -50px;
-    margin-bottom: 10px;
-    align-self: center;
 }
 
 .toggle:hover {
@@ -143,6 +182,18 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.arrow:hover {
+    background-color: rgb(66, 66, 66);
+}
+
+.arrowLeft {
+    padding-right: 3px;
+}
+
+.arrowRight {
+    padding-left: 3px;
 }
 
 .desktopArrows {
@@ -169,14 +220,59 @@
     }
 }
 
-.arrowLeft {
-    padding-right: 3px;
+.historyContainer {
+    position: absolute;
+    right: 0px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-end;
+    justify-content: flex-end;
+    padding-right: 20px;
+    padding-bottom: 20px;
+    width: 400px;    
+    height: 100%;
 }
 
-.arrowRight {
-    padding-left: 3px;
+.historyCard {
+    background-color: rgb(46, 46, 46);
+    padding: 12px;
+    border-radius: 16px;
+    border: 1px solid rgb(66, 66, 66);
+    width: 100%;
+    max-width: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 12px;
 }
 
-.arrow:hover {
-    background-color: rgb(66, 66, 66);
+.historyCard.left {
+    background-color: rgb(36, 36, 36);
+}
+
+.historyCard.right {
+    border: 1px solid rgb(0, 155, 67);
+    background-color: rgb(56, 56, 56);
+}
+
+.historyIcon {
+    background-color: rgb(26, 26, 26);
+    border: 1px solid rgb(66, 66, 66);
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgb(120, 120, 120);
+}
+
+.historyTextStack {
+    display: flex;
+    flex-direction: column;
+}
+
+.historyPrice {
+    margin-left: auto;
 }

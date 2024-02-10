@@ -3,12 +3,19 @@
 import "../styles/index.css";
 import Arrow from '../components/Arrow';
 import Stock from '../components/Stock';
+import History from '../components/History';
+
 import { getStock } from '../utils/Utils';
+import { useEffect } from 'react';
 
 export default function Home() {
-  document.onkeydown = arrowChecker;
+  useEffect(() => {
+    if (typeof window != undefined) {
+      document.onkeydown = arrowChecker;
+    }
+  }, []);
 
-function arrowChecker(e:any) {  
+  function arrowChecker(e: any) {
     e = e || window.event;
     if (e.keyCode == '37') {
       swipeLeft();
@@ -19,14 +26,14 @@ function arrowChecker(e:any) {
       }, 0);
     }
     else if (e.keyCode == '39') {
-       swipeRight();
-       var element = document.getElementById("right");
-       element?.classList.remove("lighten");
-       setTimeout(() => {
-         element?.classList.add("lighten");
-       }, 0);
+      swipeRight();
+      var element = document.getElementById("right");
+      element?.classList.remove("lighten");
+      setTimeout(() => {
+        element?.classList.add("lighten");
+      }, 0);
     }
-}
+  }
 
   const swipeLeft = () => {
     var element = document.getElementById("stock");
@@ -63,6 +70,7 @@ function arrowChecker(e:any) {
         <Arrow name="left" onClick={swipeLeft} />
         <Arrow name="right" onClick={swipeRight} />
       </div>
+      <History />
     </main>
   );
 }
