@@ -10,8 +10,14 @@ import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://marketmatch.tech'),
   title: "MarketMatch | Stock Swiping App",
   description: "Input your trading preferences and swipe on your favorite stocks.",
+  openGraph: {
+    title: "MarketMatch | Stock Swiping App",
+    description: "Input your trading preferences and swipe on your favorite stocks.",
+    type: "website",
+  }
 };
 
 export default function RootLayout({
