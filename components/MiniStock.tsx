@@ -5,7 +5,7 @@ import { Sparkline } from '@mantine/charts';
 interface MiniStockProps {
     name: string,
     ticker: string,
-    data: number[]
+    data: number[],
 }
 
 const MiniStock = ({name, ticker, data} : MiniStockProps) => {

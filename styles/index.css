@@ -465,6 +465,10 @@
         radial-gradient(at 0% 0%, hsla(256, 100%, 3%, 1) 0px, transparent 50%);
 }
 
+.appIcon {
+    margin-bottom: auto;
+}
+
 .backgroundTitle {
     color: rgb(255, 255, 255);
     font-weight: 800;

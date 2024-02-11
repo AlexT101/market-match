@@ -1,8 +1,9 @@
 import '../styles/index.css';
 import { Card, Text, Badge, Button, Group, Tabs, Textarea, ScrollArea, HoverCard } from '@mantine/core';
 import { AreaChart } from '@mantine/charts';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { IconChartHistogram, IconInfoCircle, IconMessage } from '@tabler/icons-react';
+import { getDataPoints, getBounds } from '../utils/Utils';
 
 const data = [
     {
@@ -51,7 +52,6 @@ const possiblePrompts = [
 
 const getPrompt = () => {
     return possiblePrompts[Math.floor(Math.random() * possiblePrompts.length)];
-
 }
 
 interface StockProps {
@@ -64,10 +64,28 @@ interface StockProps {
     volume: string,
     open: string,
     close: string,
-    size: string
+    size: string,
+    graph: any,
+    intraday: any
 }
 
-const Stock = ({ name, ticker, description, sector, marketcap, pe, volume, open, close, size }: StockProps) => {
+const Stock = ({ name, ticker, description, sector, marketcap, pe, volume, open, close, size, graph, intraday }: StockProps) => {
+
+    const getRange:any = () => {
+        if (graph == null){
+            return [];
+        }
+        if (dayRange == "first"){
+            return getDataPoints(intraday);
+        }else if (dayRange == "second"){
+            return getDataPoints(graph.six_month).slice(0, 5);
+        }else if (dayRange == "third"){
+            return getDataPoints(graph.six_month).slice(0, 20);
+        }else if (dayRange == "fourth"){
+            return getDataPoints(graph.six_month).slice(0, 60);
+        }
+    }
+
     const [dayRange, setDayRange] = useState<string | null>('first'); //Day range of the graph
     const [opened, setOpened] = useState(0); //Which info section is opened (graph, info, ai)
     const [showAnswer, setShowAnswer] = useState(false); //Whether to display the question or answer for the ai section
@@ -111,7 +129,9 @@ const Stock = ({ name, ticker, description, sector, marketcap, pe, volume, open,
                         </div>
                         <AreaChart
                             h={200}
-                            data={data}
+                            data={getRange()}
+                            withDots={false}
+                            yAxisProps={{ domain: [graph != null ? getBounds(getRange())[0] * 0.99 : 0, graph != null ? getBounds(getRange())[1] * 1.01 : 400] }}
                             dataKey="date"
                             series={[
                                 { name: 'Price', color: 'indigo.6' },
@@ -125,14 +145,14 @@ const Stock = ({ name, ticker, description, sector, marketcap, pe, volume, open,
                             Breakdown
                         </Text>
                         <Text size="sm" c="dimmed">
-                            Name: {name}<br/>
-                            Ticker: {ticker}<br/>
-                            Marketcap: {marketcap}<br/>
-                            PE Ratio: {pe}<br/>
-                            Consolidated Volume: {volume}<br/>
-                            Market Open: {open}<br/>
-                            Previous Close: {close}<br/>
-                            Size: {size}<br/>
+                            Name: {name}<br />
+                            Ticker: {ticker}<br />
+                            Marketcap: {marketcap}<br />
+                            PE Ratio: {pe}<br />
+                            Consolidated Volume: {volume}<br />
+                            Market Open: {open}<br />
+                            Previous Close: {close}<br />
+                            Size: {size}<br />
                             Sector: {sector}
                         </Text>
                     </Group>
@@ -188,7 +208,7 @@ const Stock = ({ name, ticker, description, sector, marketcap, pe, volume, open,
             </div>
 
             <ScrollArea h={150}>
-                <Text size="md" c="dimmed">
+                <Text size="md">
                     {description}
                 </Text>
             </ScrollArea>

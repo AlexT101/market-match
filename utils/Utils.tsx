@@ -1,4 +1,32 @@
-import { useStore } from '../utils/Data';
+export function getDataPoints (graph: any) {
+    let dataPoints = [];
+    for (let key in graph) {
+        dataPoints.push({ date: key, Price: graph[key] });
+    }
+    return dataPoints;
+}
+
+export function getDataArray (graph: any) {
+    let dataPoints = [];
+    for (let key in graph) {
+        dataPoints.push(graph[key]);
+    }
+    return dataPoints;
+}
+
+export function getBounds(data: any){
+    let smallest = data[0].Price;
+    let biggest = data[0].Price;
+    for (let key in data) {
+        if (data[key].Price < smallest) {
+            smallest = data[key].Price;
+        }
+        if (data[key].Price > biggest){
+            biggest = data[key].Price;
+        }
+    }
+    return [smallest, biggest];
+}
 
 const sampleStock = {
     "ticker": "MSI",
@@ -601,7 +629,8 @@ export async function parseStocks(stocks: any) {
             ticker: stocks[i].ticker,
             swipe: stocks[i].swipe,
             time: stocks[i].time,
-            price: stocks[i].marketOpen_data
+            price: stocks[i].marketOpen_data,
+            graph: getDataArray(stocks[i].graph_data.six_month),
         })
     }
     return newStockData;

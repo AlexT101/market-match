@@ -97,7 +97,7 @@ const Report = () => {
             </div>
             <div className="report">
                 {simpleStock.length > 0 ? (simpleStock.map((stock:any, index:number) => (
-                    <MiniStock key={index} name={stock.name} ticker={stock.ticker} data={data[0].data} />
+                    <MiniStock key={index} name={stock.name} ticker={stock.ticker} data={stock.graph} />
                 ))) : (
                     <Text c="dimmed"><i>You currently don't have any stocks.</i></Text>
                 )}

@@ -6,6 +6,7 @@ import { useForm } from '@mantine/form';
 import { useState } from 'react';
 import { useStore } from '../utils/Data';
 import { useEffect } from 'react';
+import Icon from '../public/icon.svg';
 
 const Preferences = () => {
 
@@ -34,6 +35,7 @@ const Preferences = () => {
     return (
         <main className="preferenceContainer">
             <div className="backgroundGradient"> 
+            <img className="appIcon" src={Icon.src} width={48} height={48}/>
             <Text className="backgroundTitle">Invested</Text>
             <Text className="backgroundSubtitle">Input your preferences, swipe left or right on some of the market's most popular investments, and get a curated list of stocks to research with our online web dashboard.</Text>
             </div>
