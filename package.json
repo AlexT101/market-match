@@ -18,7 +18,8 @@
     "react": "^18",
     "react-dom": "^18",
     "recharts": "^2.12.0",
-    "write-excel-file": "^1.4.29"
+    "write-excel-file": "^1.4.29",
+    "zustand": "^4.5.0"
   },
   "devDependencies": {
     "@types/node": "^20",

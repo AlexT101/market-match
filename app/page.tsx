@@ -4,8 +4,15 @@ import 'styles/index.css';
 import { Card, Text, TextInput, Select, MultiSelect, Checkbox, Button, Overlay } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { useState } from 'react';
+import { useStore } from '../utils/Data';
+import { useEffect } from 'react';
 
 const Preferences = () => {
+
+    const { preferences, setPreferences } = useStore();
+    useEffect(()=>{
+        console.log(preferences);
+    },[]);
 
     const [submitted, setSubmitted] = useState(false);
 
@@ -21,13 +28,13 @@ const Preferences = () => {
 
     const submitPreferences = () => {
         setSubmitted(true);
-        console.log(form.values);
+        setPreferences(form.values);
     }
 
     return (
         <main className="preferenceContainer">
             <div className="backgroundGradient"> 
-            <Text className="backgroundTitle">Stock Swipes</Text>
+            <Text className="backgroundTitle">Invested</Text>
             <Text className="backgroundSubtitle">Input your preferences, swipe left or right on some of the market's most popular investments, and get a curated list of stocks to research with our online web dashboard.</Text>
             </div>
             <Card className="preferenceBox" shadow="sm" padding="xl" radius="md" withBorder>
@@ -36,7 +43,7 @@ const Preferences = () => {
                 <MultiSelect size="md" data={['Energy', 'Materials', 'Industrials', 'Utilities', 'Healthcare', 'Financials', 'Consumer Discretionary', 'Consumer Staples', 'Information Technology', 'Communication Services', 'Real Estate']} className="fullWidth" label="Sector" placeholder="Select" radius="md"  {...form.getInputProps('sector')} />
                 <MultiSelect size="md" data={['Low Risk', 'Medium Risk', 'High Risk']} className="fullWidth" label="Risk Level" placeholder="Select" radius="md"  {...form.getInputProps('risk')} />
                 <MultiSelect size="md" data={['0-5 Years', '6-10 Years', '10-20 Years', '21+ Years']} className="fullWidth" label="Company Age" placeholder="Select" radius="md"  {...form.getInputProps('age')} />
-                <MultiSelect size="md" data={['Small', 'Medium', 'Large']} className="fullWidth" label="Company Age" placeholder="Select" radius="md"  {...form.getInputProps('size')} />
+                <MultiSelect size="md" data={['Small', 'Medium', 'Large']} className="fullWidth" label="Company Size" placeholder="Select" radius="md"  {...form.getInputProps('size')} />
                 <Checkbox size="md" mt="sm" color="indigo.6" label="Limit to companies with dividends" {...form.getInputProps('dividends')} />
                 <Button size="md" fullWidth color="indigo.6" mt="lg" radius="md" onClick={submitPreferences}>Submit Preferences</Button>
                 {submitted &&

@@ -5,7 +5,6 @@ import { Center, Tooltip, UnstyledButton, Stack, rem, Modal, Text } from '@manti
 import { useDisclosure } from '@mantine/hooks';
 import {
     IconInfoCircle,
-    IconForms,
     IconHome2,
     IconClipboardText,
     IconGraph,
@@ -100,7 +99,7 @@ const Navbar = () => {
         }}
       >
         <Text c="dimmed">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            Invested is a new take on the traditional financial dashboard. Aimed at beginners who are new to the stock market, we simplify the information we provide and help you search through the hundreds of stocks available by using your preferences. You can also ask our AI advisor any questions you might have about a stock. You can choose stocks you like by swiping right on them, and we will generate a list of stocks that you could further research for investment.
         </Text>
       </Modal>
         </>
