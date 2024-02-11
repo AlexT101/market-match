@@ -4,6 +4,7 @@ import { AreaChart } from '@mantine/charts';
 import { useState } from 'react';
 import { IconChartHistogram, IconInfoCircle, IconMessage } from '@tabler/icons-react';
 import { getDataPoints, getBounds, getResponse } from '../utils/Utils';
+import { useStore } from 'utils/Data';
 
 const data = [
     {
@@ -70,7 +71,7 @@ interface StockProps {
 }
 
 const Stock = ({ name, ticker, description, sector, marketcap, pe, volume, open, close, size, graph, intraday }: StockProps) => {
-
+    const { currentStock } = useStore();
     const getRange:any = () => {
         if (graph == null){
             return [];
@@ -99,7 +100,7 @@ const Stock = ({ name, ticker, description, sector, marketcap, pe, volume, open,
             setPrompt(getPrompt());
             setShowAnswer(false);
         } else {
-            setAnswer(await getResponse(question));
+            setAnswer(await getResponse(currentStock.ticker, currentStock.name_data, question) || "No response could be provided. Please try again later.");
             setQuestion("");
             setShowAnswer(true);
         }
@@ -112,7 +113,7 @@ const Stock = ({ name, ticker, description, sector, marketcap, pe, volume, open,
                 <Text fw={800} size="xl">{name}</Text>
                 <Badge color="indigo.6" size="xl">{ticker}</Badge>
             </Group>
-            <Text size="md" c="dimmed">{open}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;{sector} Sector</Text>
+            <Text size="md" c="dimmed">${open}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;{sector} Sector</Text>
             <Card.Section>
                 {opened == 0 ? (
                     <Group className="stockSection chart">
