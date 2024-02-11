@@ -8,18 +8,39 @@ import Generate from 'components/Generate';
 
 import { getStock } from 'utils/Utils';
 import { useEffect } from 'react';
+import { useStore } from 'utils/Data';
 
 export default function Home() {
+  const { currentStock, setCurrentStock, addStock, clearStocks, stocks } = useStore();
+
+  async function fetchNewStock() {
+    const stock = await getStock();
+      await setCurrentStock(stock);
+  }
+
+  async function loadStock() {
+    const cur = await currentStock;
+    if (cur == null || cur.ticker == "") {
+      fetchNewStock();
+    } else {
+      setCurrentStock(cur);
+    }
+    console.log(cur);
+  }
+
+
   useEffect(() => {
     if (typeof window != undefined) {
       document.onkeydown = arrowChecker;
     }
+    loadStock();
   }, []);
 
   function arrowChecker(e: any) {
     e = e || window.event;
     if (e.keyCode == '37') {
       swipeLeft();
+      fetchNewStock();
       var element = document.getElementById("left");
       element?.classList.remove("lighten");
       setTimeout(() => {
@@ -28,6 +49,7 @@ export default function Home() {
     }
     else if (e.keyCode == '39') {
       swipeRight();
+      fetchNewStock();
       var element = document.getElementById("right");
       element?.classList.remove("lighten");
       setTimeout(() => {
@@ -37,6 +59,11 @@ export default function Home() {
   }
 
   const swipeLeft = () => {
+    if (!stocks.find((stock) => stock.ticker == currentStock.ticker)) {
+      currentStock.swipe = "left";
+      currentStock.time = new Date();
+      addStock(currentStock);
+    }
     var element = document.getElementById("stock");
     element?.classList.remove("tiltLeft");
     element?.classList.remove("tiltRight");
@@ -44,10 +71,14 @@ export default function Home() {
       element?.classList.add("tiltLeft");
     }, 0);
     console.log("swipe left");
-    getStock();
   }
 
   const swipeRight = () => {
+    if (!stocks.find((stock) => stock.ticker == currentStock.ticker)) {
+      currentStock.swipe = "right";
+      currentStock.time = new Date();
+      addStock(currentStock);
+    }
     var element = document.getElementById("stock");
     element?.classList.remove("tiltLeft");
     element?.classList.remove("tiltRight");
@@ -55,7 +86,6 @@ export default function Home() {
       element?.classList.add("tiltRight");
     }, 0);
     console.log("swipe right");
-    getStock();
   }
 
   return (
@@ -63,7 +93,7 @@ export default function Home() {
       <div className="desktopArrows">
         <Arrow name="left" onClick={swipeLeft} />
       </div>
-      <Stock />
+      <Stock name={currentStock.name_data} ticker={currentStock.ticker} description={currentStock.description_data} sector={currentStock.sector_data} marketcap={currentStock.marketcap_data} pe={currentStock.pe_data} volume={currentStock.consolidatedvolume_data} open={currentStock.marketOpen_data} close={currentStock.previousClose_data} size={currentStock.size_data} />
       <div className="desktopArrows">
         <Arrow name="right" onClick={swipeRight} />
       </div>

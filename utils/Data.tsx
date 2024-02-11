@@ -25,14 +25,15 @@ interface Stock {
 interface State {
     preferences: PreferencesProps
     setPreferences: (by: PreferencesProps) => void
-    currentStock: Stock
-    setCurrentStock: (by: Stock) => void
-    stocks: Stock[]
-    addStock: (by: Stock) => void
+    currentStock: any
+    setCurrentStock: (by: any) => void
+    stocks: any[]
+    addStock: (by: any) => void
+    clearStocks: () => void
 }
 
 export const useStore = create<State>()(
-    persist(
+   // persist(
         (set) => ({
             preferences: { sector: [], risk: [], age: [], size: [], dividends: false },
             setPreferences: (by) => set((state) => ({ preferences: by })),
@@ -40,10 +41,11 @@ export const useStore = create<State>()(
             setCurrentStock: (by) => set((state) => ({ currentStock: by })),
             stocks: [],
             addStock: (by) => set((state) => ({ stocks: [...state.stocks, by] })),
+            clearStocks: () => set((state) => ({ stocks: [] }))
         }),
-        {
-            name: 'data-storage',
-            storage: createJSONStorage(() => sessionStorage),
-        }
-    )
+        //{
+       //     name: 'data-storage',
+      //      storage: createJSONStorage(() => sessionStorage),
+      //  }
+   // )
 )

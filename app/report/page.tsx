@@ -4,6 +4,10 @@ import 'styles/index.css';
 import MiniStock from 'components/MiniStock';
 import { Text, Button } from '@mantine/core';
 import writeXlsxFile from 'write-excel-file';
+import { useStore } from 'utils/Data';
+import { useState, useEffect } from 'react';
+import { getStock, parseStocks } from 'utils/Utils';
+
 
 const data = [
     {
@@ -60,6 +64,17 @@ const schema = [
 ]
 
 const Report = () => {
+    const { stocks } = useStore();
+    const [simpleStock, setSimpleStock] = useState<any>([]);
+
+    async function loadSimpleStocks(){
+        const simpleStock = (await parseStocks(stocks)).filter((val) => val.swipe == "right");
+        await setSimpleStock(simpleStock);
+    }
+
+    useEffect(()=>{
+        loadSimpleStocks();
+    },[stocks]);
 
     const exportReport = async () => {
         await writeXlsxFile(data, {
@@ -81,9 +96,11 @@ const Report = () => {
             </Button>
             </div>
             <div className="report">
-                {data.map((stock, index) => (
-                    <MiniStock key={index} name={stock.name} ticker={stock.ticker} data={stock.data} />
-                ))}
+                {simpleStock.length > 0 ? (simpleStock.map((stock:any, index:number) => (
+                    <MiniStock key={index} name={stock.name} ticker={stock.ticker} data={data[0].data} />
+                ))) : (
+                    <Text c="dimmed"><i>You currently don't have any stocks.</i></Text>
+                )}
             </div>
             <Text size="lg" c="dimmed"><i>*This list is not meant to be financial advice. Please invest in stocks at your own discretion.</i></Text>
         </main>

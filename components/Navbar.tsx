@@ -13,6 +13,7 @@ import {
 import classes from 'styles//Navbar.module.css';
 import { useRouter } from 'next/navigation';
 import { usePathname } from 'next/navigation';
+import Icon from '../public/icon.svg';
 
 interface NavbarLinkProps {
     icon: typeof IconHome2;
@@ -73,7 +74,7 @@ const Navbar = () => {
         <>
         <nav className={classes.navbar}>
             <Center>
-                <IconGraph size={30}/>
+                <img src={Icon.src} width={30} height={30}/>
             </Center>
 
             <div className={classes.navbarMain}>

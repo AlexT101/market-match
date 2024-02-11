@@ -4,11 +4,6 @@ import { AreaChart } from '@mantine/charts';
 import { useState } from 'react';
 import { IconChartHistogram, IconInfoCircle, IconMessage } from '@tabler/icons-react';
 
-
-const name = "Alphabet Inc.";
-const ticker = "GOOG";
-const description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
-
 const data = [
     {
         date: 'Mar 22',
@@ -59,7 +54,20 @@ const getPrompt = () => {
 
 }
 
-const Stock = () => {
+interface StockProps {
+    name: string,
+    ticker: string,
+    description: string,
+    sector: string,
+    marketcap: string,
+    pe: string,
+    volume: string,
+    open: string,
+    close: string,
+    size: string
+}
+
+const Stock = ({ name, ticker, description, sector, marketcap, pe, volume, open, close, size }: StockProps) => {
     const [dayRange, setDayRange] = useState<string | null>('first'); //Day range of the graph
     const [opened, setOpened] = useState(0); //Which info section is opened (graph, info, ai)
     const [showAnswer, setShowAnswer] = useState(false); //Whether to display the question or answer for the ai section
@@ -86,7 +94,7 @@ const Stock = () => {
                 <Text fw={800} size="xl">{name}</Text>
                 <Badge color="indigo.6" size="xl">{ticker}</Badge>
             </Group>
-            <Text size="md" c="dimmed">$150.22&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Tech Sector</Text>
+            <Text size="md" c="dimmed">{open}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;{sector} Sector</Text>
             <Card.Section>
                 {opened == 0 ? (
                     <Group className="stockSection chart">
@@ -117,14 +125,15 @@ const Stock = () => {
                             Breakdown
                         </Text>
                         <Text size="sm" c="dimmed">
-                            Previous Close: 147.22<br />
-                            Open: 147.95<br />
-                            Bid: 150.10 x 1000<br />
-                            Ask: 150.18 x 900<br />
-                            Market Cap (intraday): 1.858T<br />
-                            Volume: 21,822,453<br />
-                            PE Ratio: 25.90<br />
-                            1y Target Est: 161.00
+                            Name: {name}<br/>
+                            Ticker: {ticker}<br/>
+                            Marketcap: {marketcap}<br/>
+                            PE Ratio: {pe}<br/>
+                            Consolidated Volume: {volume}<br/>
+                            Market Open: {open}<br/>
+                            Previous Close: {close}<br/>
+                            Size: {size}<br/>
+                            Sector: {sector}
                         </Text>
                     </Group>
                 ) : (
@@ -178,9 +187,11 @@ const Stock = () => {
                 </Button>
             </div>
 
-            <Text size="md" c="dimmed">
-                {description}
-            </Text>
+            <ScrollArea h={150}>
+                <Text size="md" c="dimmed">
+                    {description}
+                </Text>
+            </ScrollArea>
 
             <Button size="md" color="indigo.6" fullWidth mt="md" radius="md" component="a" href={"https://finance.yahoo.com/quote/" + ticker} target="_blank" rel="noopener noreferrer">
                 Yahoo Finance Page

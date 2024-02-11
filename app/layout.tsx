@@ -20,7 +20,7 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <ColorSchemeScript forceColorScheme="dark" />
-        <link rel="shortcut icon" href="/favicon.svg" />
+        <link rel="icon" href="/icon.ico" sizes="any" />
         <meta
           name="viewport"
           content="minimum-scale=1, initial-scale=1, width=device-width, user-scalable=no"
