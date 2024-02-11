@@ -46,7 +46,7 @@ export const useStore = create<State>()(
             stocks: [],
             addStock: (by) => set((state) => ({ stocks: [...state.stocks, by] })),
             clearStocks: () => set((state) => ({ stocks: [] })),
-            results: 5,
+            results: 25,
             setResults: (by) => set((state) => ({ results: by })),
             clearCurrentStock: () => set((state) => ({ currentStock: { name: '', ticker: '', sector: '', graph: [], description: '' } })),
             investment: 500,

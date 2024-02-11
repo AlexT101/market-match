@@ -53,12 +53,16 @@ export function getBounds(data: any) {
 export async function getAmounts(size: number, risk: string) {
     let riskType = risk == "Low Risk (Conservative)" ? "low" : risk == "Medium Risk (Mix)" ? "medium" : "high";
     const response = await fetch("http://13.58.138.38:8000/RecommendedPortfolio/" + riskType);
-    const data = await response.json();
-    let result = [];
-    for (let i = 0; i < size; i++) {
-        result.push(1 / size);
+    const data = (await response.json()).Allocation;
+    console.log(data);
+    if (data.Allocation == null){
+        let result = [];
+        for (let i = 0; i < size; i++) {
+            result.push(1 / size);
+        }
+        //return result;
     }
-    return result;
+    return data;
 }
 
 //Get the next stock

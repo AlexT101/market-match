@@ -1,5 +1,5 @@
 import '../styles/index.css';
-import { Card, Text, Badge, Button, Group, Tabs, Textarea, ScrollArea, HoverCard, LoadingOverlay } from '@mantine/core';
+import { Card, Text, Badge, Button, Group, Tabs, Textarea, ScrollArea, HoverCard, LoadingOverlay, Progress } from '@mantine/core';
 import { AreaChart } from '@mantine/charts';
 import { useState } from 'react';
 import { IconChartHistogram, IconInfoCircle, IconMessage } from '@tabler/icons-react';
@@ -45,22 +45,23 @@ interface StockProps {
     close: string,
     size: string,
     graph: any,
-    intraday: any
+    intraday: any,
+    sentiment: string
 }
 
-const Stock = ({ name, ticker, description, sector, marketcap, pe, volume, open, close, size, graph, intraday }: StockProps) => {
+const Stock = ({ name, ticker, description, sector, marketcap, pe, volume, open, close, size, graph, intraday, sentiment }: StockProps) => {
     //Get the range of the graph based on the day range
-    const getRange:any = () => {
-        if (graph == null){
+    const getRange: any = () => {
+        if (graph == null) {
             return [];
         }
-        if (dayRange == "first"){
+        if (dayRange == "first") {
             return getDataPoints(intraday);
-        }else if (dayRange == "second"){
+        } else if (dayRange == "second") {
             return getDataPoints(graph.six_month).slice(0, 5);
-        }else if (dayRange == "third"){
+        } else if (dayRange == "third") {
             return getDataPoints(graph.six_month).slice(0, 20);
-        }else if (dayRange == "fourth"){
+        } else if (dayRange == "fourth") {
             return getDataPoints(graph.six_month).slice(0, 60);
         }
     }
@@ -73,7 +74,7 @@ const Stock = ({ name, ticker, description, sector, marketcap, pe, volume, open,
     const [answer, setAnswer] = useState(""); //Ai answer to user question
 
     //Either exit out of the answer box or send the question
-    async function sendQuestion () {
+    async function sendQuestion() {
         if (showAnswer) {
             setPrompt(getPrompt());
             setShowAnswer(false);
@@ -86,10 +87,23 @@ const Stock = ({ name, ticker, description, sector, marketcap, pe, volume, open,
 
     return (
         <Card id="stock" className="stock" shadow="sm" padding="lg" radius="md" withBorder>
-            <LoadingOverlay visible={name == null || name == ""} zIndex={1000} overlayProps={{ radius: "sm", blur: 2 }} loaderProps={{color:"indigo.6"}}/>
+            <LoadingOverlay visible={name == null || name == ""} zIndex={1000} overlayProps={{ radius: "sm", blur: 2 }} loaderProps={{ color: "indigo.6" }} />
             <Group justify="space-between">
                 <Text fw={800} size="xl">{name}</Text>
-                <Badge color="indigo.6" size="xl">{ticker}</Badge>
+                <HoverCard width={200} shadow="md" position="bottom" withArrow arrowSize={12}>
+                    <HoverCard.Target>
+                        <Badge color="indigo.6" size="xl">{ticker}</Badge>
+                    </HoverCard.Target>
+                    <HoverCard.Dropdown>
+                            <Text size="md">
+                                Sentiment Analysis:
+                            </Text>
+                            <Text className="sentimentHeader" c={parseInt(sentiment) > 55 ? "green" : parseInt(sentiment) < 45 ? "red" : "rgb(150, 150, 150)"}>
+                                {sentiment}/100
+                            </Text>
+                            <Progress value={parseInt(sentiment)} size="lg" radius="xl" color={parseInt(sentiment) > 55 ? "green" : parseInt(sentiment) < 45 ? "red" : "rgb(150, 150, 150)"} />
+                    </HoverCard.Dropdown>
+                </HoverCard>
             </Group>
             <Text size="md" c="dimmed">${open}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;{sector} Sector</Text>
             <Card.Section>
@@ -116,7 +130,7 @@ const Stock = ({ name, ticker, description, sector, marketcap, pe, volume, open,
                                 { name: 'Price', color: 'indigo.6' },
                             ]}
                             curveType="linear"
-                            valueFormatter={((value: number) => "$"+(Math.round(value*100)/100).toString())}
+                            valueFormatter={((value: number) => "$" + (Math.round(value * 100) / 100).toString())}
                         />
                     </Group>
                 ) : opened == 1 ? (
@@ -140,7 +154,7 @@ const Stock = ({ name, ticker, description, sector, marketcap, pe, volume, open,
                     <Group className="stockSection ai">
                         <div className="aiHeader">
                             <Text>Consult with AI</Text>
-                            <HoverCard width={280} shadow="md" position="right">
+                            <HoverCard width={280} shadow="md" position="right" withArrow arrowSize={12}>
                                 <HoverCard.Target>
                                     <IconInfoCircle size={18} />
                                 </HoverCard.Target>

@@ -33,12 +33,12 @@ const schema = [
 const Report = () => {
     const { stocks, results, investment, preferences } = useStore();
     const [simpleStock, setSimpleStock] = useState<any>([]);
-    const [amounts, setAmounts] = useState<any>([]);
+    const [amounts, setAmounts] = useState<any>({});
 
 
     //Load data from store
     async function loadAmounts(){
-        setAmounts(await getAmounts(results, preferences.risk));
+        setAmounts(await getAmounts(Math.min(results, simpleStock.length), preferences.risk));
     }
     useEffect(() => {
         loadAmounts();
@@ -54,7 +54,7 @@ const Report = () => {
 
     //Function to export report and .xlsx file
     const exportReport = async () => {
-        await writeXlsxFile(stocks, {
+        await writeXlsxFile(simpleStock, {
             schema,
             fileName: 'stockReport.xlsx'
         });
@@ -74,7 +74,7 @@ const Report = () => {
             </div>
             <div className="report">
                 {simpleStock.length > 0 ? (simpleStock.slice(0, results).map((stock:any, index:number) => (
-                    <MiniStock key={index} name={stock.name} ticker={stock.ticker} data={stock.graph} amount={(String)(Math.round(amounts[index] * investment * 100)/100)}/>
+                    <MiniStock key={index} name={stock.name} ticker={stock.ticker} data={stock.graph} amount={(String)(Math.round((amounts[stock.ticker] || amounts[index]) * investment * 100)/100)}/>
                 ))) : (
                     <Text c="dimmed"><i>You currently don't have any stocks.</i></Text>
                 )}

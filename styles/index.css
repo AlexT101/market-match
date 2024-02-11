@@ -30,7 +30,7 @@
 }
 
 .stock {
-    max-width: 400px;
+    max-width: 450px;
     display: flex;
     flex-direction: column;
 
@@ -92,6 +92,10 @@
     100% {
         background-color: rgb(66, 66, 66);
     }
+}
+
+.sentimentHeader {
+    font-size: 32px;
 }
 
 .stockSection {

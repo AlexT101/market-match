@@ -120,7 +120,7 @@ export default function Home() {
       <div className="desktopArrows">
         <Arrow name="left" onClick={swipeLeft} disabled={currentStock.ticker == "" || currentStock.ticker == null} />
       </div>
-      <Stock name={currentStock.name_data} ticker={currentStock.ticker} description={currentStock.description_data} sector={currentStock.sector_data} marketcap={currentStock.marketcap_data} pe={currentStock.pe_data} volume={currentStock.consolidatedvolume_data} open={currentStock.marketOpen_data} close={currentStock.previousClose_data} size={currentStock.size_data} graph={currentStock.graph_data} intraday={currentStock.intraday_data} />
+      <Stock name={currentStock.name_data} ticker={currentStock.ticker} description={currentStock.description_data} sector={currentStock.sector_data} marketcap={currentStock.marketcap_data} pe={currentStock.pe_data} volume={currentStock.consolidatedvolume_data} open={currentStock.marketOpen_data} close={currentStock.previousClose_data} size={currentStock.size_data} graph={currentStock.graph_data} intraday={currentStock.intraday_data} sentiment={currentStock.sentiment}/>
       <div className="desktopArrows">
         <Arrow name="right" onClick={swipeRight} disabled={currentStock.ticker == "" || currentStock.ticker == null} />
       </div>

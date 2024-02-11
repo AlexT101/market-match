@@ -6,7 +6,7 @@ interface MiniStockProps {
     name: string,
     ticker: string,
     data: number[],
-    amount: string
+    amount: string,
 }
 
 const MiniStock = ({name, ticker, data, amount} : MiniStockProps) => {
