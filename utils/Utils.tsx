@@ -28,6 +28,17 @@ export function getBounds(data: any){
     return [smallest, biggest];
 }
 
+export async function getAmounts(size: number, risk: string){
+    let riskType = risk == "Low Risk (Conservative)" ? "low" : risk == "Medium Risk (Mix)" ? "medium" : "high";
+    const response = await fetch("http://13.58.138.38:8000//RecommendedPortfolio/" + riskType);
+    const data = await response.json();
+    let result = [];
+    for (let i = 0; i < size; i++){
+        result.push(1/size);
+    }
+    return result;
+}
+
 const sampleStock = {
     "ticker": "MSI",
    "graph_data": {
@@ -629,6 +640,10 @@ export async function getStock(ticker: string, swipe: boolean) {
 }
 
 export async function sendPreferences(preferences: any){
+    let risk = preferences.risk == "Low Risk (Conservative)" ? 20 : preferences.risk == "Medium Risk (Mix)" ? 50 : 80;
+    let sectors = preferences.sectors.join("&");
+    const response = await fetch("http://13.58.138.38:8000/create_account/" + risk + sectors + preferences.age + preferences.size);
+
     console.log(preferences);
 }
 

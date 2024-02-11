@@ -32,6 +32,8 @@ interface State {
     results: number
     setResults: (by: number) => void
     clearCurrentStock: () => void
+    investment: number
+    setInvestment: (by: string) => void
 }
 
 export const useStore = create<State>()(
@@ -46,7 +48,9 @@ export const useStore = create<State>()(
             clearStocks: () => set((state) => ({ stocks: [] })),
             results: 5,
             setResults: (by) => set((state) => ({ results: by })),
-            clearCurrentStock: () => set((state) => ({ currentStock: { name: '', ticker: '', sector: '', graph: [], description: '' } }))
+            clearCurrentStock: () => set((state) => ({ currentStock: { name: '', ticker: '', sector: '', graph: [], description: '' } })),
+            investment: 500,
+            setInvestment: (by) => set((state) => ({ investment: parseInt(by.slice(1)) }))
         }),
         //{
        //     name: 'data-storage',

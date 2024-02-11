@@ -6,7 +6,7 @@ import { Text, Button } from '@mantine/core';
 import writeXlsxFile from 'write-excel-file';
 import { useStore } from 'utils/Data';
 import { useState, useEffect } from 'react';
-import { parseStocks } from 'utils/Utils';
+import { parseStocks, getAmounts } from 'utils/Utils';
 
 
 const data = [
@@ -64,8 +64,18 @@ const schema = [
 ]
 
 const Report = () => {
-    const { stocks, results } = useStore();
+    const { stocks, results, investment, preferences } = useStore();
     const [simpleStock, setSimpleStock] = useState<any>([]);
+    const [amounts, setAmounts] = useState<any>([]);
+
+
+    async function loadAmounts(){
+        setAmounts(await getAmounts(results, preferences.risk));
+    }
+
+    useEffect(() => {
+        loadAmounts();
+    }, [simpleStock]);
 
     async function loadSimpleStocks(){
         const simpleStock = (await parseStocks(stocks)).filter((val) => val.swipe == "right");
@@ -97,7 +107,7 @@ const Report = () => {
             </div>
             <div className="report">
                 {simpleStock.length > 0 ? (simpleStock.slice(0, results).map((stock:any, index:number) => (
-                    <MiniStock key={index} name={stock.name} ticker={stock.ticker} data={stock.graph} />
+                    <MiniStock key={index} name={stock.name} ticker={stock.ticker} data={stock.graph} amount={(String)(Math.round(amounts[index] * investment * 100)/100)}/>
                 ))) : (
                     <Text c="dimmed"><i>You currently don't have any stocks.</i></Text>
                 )}

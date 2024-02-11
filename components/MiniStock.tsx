@@ -6,13 +6,14 @@ interface MiniStockProps {
     name: string,
     ticker: string,
     data: number[],
+    amount: string
 }
 
-const MiniStock = ({name, ticker, data} : MiniStockProps) => {
+const MiniStock = ({name, ticker, data, amount} : MiniStockProps) => {
     return (
         <div className="miniStock">
             <div className="miniStockStack">
-                <Text size="md" c="dimmed">{ticker}</Text>
+                <Text size="md" c="dimmed">{ticker + (amount == "" ? "" : " - $" + amount)}</Text>
                 <Text size="lg">{name}</Text>
             </div>
             <Sparkline
