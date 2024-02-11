@@ -25,7 +25,6 @@ export default function Home() {
     } else {
       setCurrentStock(cur);
     }
-    console.log(cur);
   }
 
 
@@ -70,7 +69,6 @@ export default function Home() {
     setTimeout(() => {
       element?.classList.add("tiltLeft");
     }, 0);
-    console.log("swipe left");
   }
 
   const swipeRight = () => {
@@ -85,7 +83,6 @@ export default function Home() {
     setTimeout(() => {
       element?.classList.add("tiltRight");
     }, 0);
-    console.log("swipe right");
   }
 
   return (

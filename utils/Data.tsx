@@ -3,9 +3,9 @@ import { persist, createJSONStorage } from 'zustand/middleware'
 
 interface PreferencesProps {
     sector: string[];
-    risk: string[];
-    age: string[];
-    size: string[];
+    risk: string;
+    age: string;
+    size: string;
 }
 
 interface GraphPoint {
@@ -16,7 +16,7 @@ interface GraphPoint {
 interface Stock {
     name: string;
     ticker: string;
-    sector: string;
+    sector: string[];
     graph: GraphPoint[];
     description: string;
 }
@@ -34,7 +34,7 @@ interface State {
 export const useStore = create<State>()(
    // persist(
         (set) => ({
-            preferences: { sector: [], risk: [], age: [], size: [], dividends: false },
+            preferences: { sector: [], risk: "", age: "", size: "" },
             setPreferences: (by) => set((state) => ({ preferences: by })),
             currentStock: { name: '', ticker: '', sector: '', graph: [], description: '' },
             setCurrentStock: (by) => set((state) => ({ currentStock: by })),

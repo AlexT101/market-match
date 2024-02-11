@@ -623,11 +623,20 @@ export async function getStock(ticker: string) {
     }else{
         
     }
+    //const response = await fetch("http://13.58.138.38:8000/get_next_ticker");
+    //console.log(response);
+    //const data = await response.json();
+    //return data;
     return sampleStock;
 }
 
 export async function sendPreferences(preferences: any){
     console.log(preferences);
+}
+
+export async function getResponse(question: string){
+    console.log(question);
+    return question;
 }
 
 export async function parseStocks(stocks: any) {

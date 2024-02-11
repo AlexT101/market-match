@@ -3,7 +3,7 @@ import { Card, Text, Badge, Button, Group, Tabs, Textarea, ScrollArea, HoverCard
 import { AreaChart } from '@mantine/charts';
 import { useState } from 'react';
 import { IconChartHistogram, IconInfoCircle, IconMessage } from '@tabler/icons-react';
-import { getDataPoints, getBounds } from '../utils/Utils';
+import { getDataPoints, getBounds, getResponse } from '../utils/Utils';
 
 const data = [
     {
@@ -94,13 +94,12 @@ const Stock = ({ name, ticker, description, sector, marketcap, pe, volume, open,
     const [answer, setAnswer] = useState(""); //Ai answer to user question
 
     //Either exit out of the answer box or send the question
-    const sendQuestion = () => {
+    async function sendQuestion () {
         if (showAnswer) {
             setPrompt(getPrompt());
             setShowAnswer(false);
         } else {
-            console.log(question);
-            setAnswer(question);
+            setAnswer(await getResponse(question));
             setQuestion("");
             setShowAnswer(true);
         }
