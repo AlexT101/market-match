@@ -11,7 +11,11 @@ interface HistoryCardProps {
 }
 
 const getTime = (date: Date) => {
-    return (date.getHours() % 12) + ":" + date.getMinutes() + " " + (date.getHours() > 12 ? "PM" : "AM");
+    let hours = (String) (date.getHours() % 12);
+    let minutes = (String) (date.getMinutes());
+    if (hours.length == 1) hours = "0" + hours;
+    if (minutes.length == 1) minutes = "0" + minutes;
+    return hours + ":" + minutes + " " + (date.getHours() > 12 ? "PM" : "AM");
 }
 
 const HistoryCard = ({ name, time, price, direction }: HistoryCardProps) => {
