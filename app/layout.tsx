@@ -4,6 +4,7 @@ import '@mantine/core/styles.css';
 import '@mantine/charts/styles.css';
 import { MantineProvider, ColorSchemeScript } from "@mantine/core";
 import Navbar from '../components/Navbar';
+import Footer from '../components/FooterSimple';
 
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -32,6 +33,7 @@ export default function RootLayout({
         <MantineProvider forceColorScheme="dark">
           <Navbar />
           {children}
+          <Footer />
           <Analytics />
           <SpeedInsights />
         </MantineProvider>

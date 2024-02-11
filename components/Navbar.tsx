@@ -7,7 +7,6 @@ import {
     IconInfoCircle,
     IconHome2,
     IconClipboardText,
-    IconGraph,
     IconChartHistogram
 } from '@tabler/icons-react';
 import classes from 'styles//Navbar.module.css';
@@ -51,9 +50,9 @@ const activeNav = (pathname: string) => {
 }
 
 const Navbar = () => {
+    const router = useRouter();
     const pathname = usePathname();
     const [active, setActive] = useState(activeNav(pathname));
-    const router = useRouter();
     const [opened, { open, close }] = useDisclosure(false);
 
 
