@@ -51,18 +51,21 @@ export function getBounds(data: any) {
 
 //Get amounts to invest per stock
 export async function getAmounts(size: number, risk: string) {
-    let riskType = risk == "Low Risk (Conservative)" ? "low" : risk == "Medium Risk (Mix)" ? "medium" : "high";
-    const response = await fetch("http://13.58.138.38:8000/RecommendedPortfolio/" + riskType);
-    const data = (await response.json()).Allocation;
-    console.log(data);
-    if (data.Allocation == null){
-        let result = [];
-        for (let i = 0; i < size; i++) {
-            result.push(1 / size);
+    if (size > 0) {
+        let riskType = risk == "Low Risk (Conservative)" ? "low" : risk == "Medium Risk (Mix)" ? "medium" : "high";
+        const response = await fetch("http://13.58.138.38:8000/RecommendedPortfolio/" + riskType);
+        const data = (await response.json()).Allocation;
+        if (data.Allocation == null) {
+            let result = [];
+            for (let i = 0; i < size; i++) {
+                result.push(1 / size);
+            }
+            //return result;
         }
-        //return result;
+        return data;
+    } else {
+        return [];
     }
-    return data;
 }
 
 //Get the next stock
@@ -73,7 +76,6 @@ export async function getStock(ticker: string, swipe: boolean) {
     }
     const response = await fetch("http://13.58.138.38:8000/get_next_ticker/" + append);
     const data = await response.json();
-    console.log(data);
     return data;
     //return sampleStock;
 }
@@ -90,12 +92,10 @@ export async function sendPreferences(preferences: any) {
         }
     }
     const response = await fetch("http://13.58.138.38:8000/create_account/" + risk + "/" + sectors + "/" + preferences.age + "/" + preferences.size);
-
-    console.log(preferences);
 }
 
 //Send request to GPT model with a prompt and the user question
-export async function getResponse(ticker:string, name: string, question: string) {
+export async function getResponse(ticker: string, name: string, question: string) {
     const prompt = "You are going to provide helpful answers to questions a beginning stock investor might have. The ticker for the current company stock is " + ticker + " and the company name is " + name + ". Do not provide financial advice. Here is the question: "
     const response = await POST(prompt + question);
     return response.choices[0].message.content;

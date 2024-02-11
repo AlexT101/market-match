@@ -13,7 +13,7 @@ const MiniStock = ({name, ticker, data, amount} : MiniStockProps) => {
     return (
         <div className="miniStock">
             <div className="miniStockStack">
-                <Text size="md" c="dimmed">{ticker + (amount == "" ? "" : " - $" + amount)}</Text>
+                <Text size="md" c="dimmed">{ticker + ((amount == "NaN" || amount == "") ? "" : " - $" + amount)}</Text>
                 <Text size="lg">{name}</Text>
             </div>
             <Sparkline
