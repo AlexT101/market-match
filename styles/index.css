@@ -482,6 +482,10 @@
         radial-gradient(at 0% 100%, hsla(257, 100%, 3%, 1) 0px, transparent 50%),
         radial-gradient(at 80% 100%, hsla(270, 100%, 17%, 1) 0px, transparent 50%),
         radial-gradient(at 0% 0%, hsla(256, 100%, 3%, 1) 0px, transparent 50%);
+
+    @media only screen and (max-width: 400px) {
+        padding: 40px;
+    }
 }
 
 .appIcon {
@@ -504,6 +508,8 @@
     flex-direction: column;
     background-color: rgb(36, 36, 36);
     gap: 10px;
+    min-height: 585px;
+    justify-content: space-between;
 
     @media only screen and (min-width: 800px) {
         min-width: 400px;
@@ -513,6 +519,13 @@
     @media only screen and (max-width: 800px) {
         min-width: 300px;
     }
+}
+
+.preferenceQuestions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 10px;
 }
 
 .preferencesOverlay {

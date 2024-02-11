@@ -7,6 +7,7 @@ import writeXlsxFile from 'write-excel-file';
 import { useStore } from 'utils/Data';
 import { useState, useEffect } from 'react';
 import { parseStocks, getAmounts } from 'utils/Utils';
+import { useRouter } from 'next/navigation';
 
 //Schema for exporting .xlsx file
 interface StockType {
@@ -31,26 +32,27 @@ const schema = [
 ]
 
 const Report = () => {
+    const router = useRouter();
+
     const { stocks, results, investment, preferences } = useStore();
     const [simpleStock, setSimpleStock] = useState<any>([]);
     const [amounts, setAmounts] = useState<any>({});
 
-
     //Load data from store
-    async function loadAmounts(){
+    async function loadAmounts() {
         setAmounts(await getAmounts(Math.min(results, simpleStock.length), preferences.risk));
     }
     useEffect(() => {
         loadAmounts();
     }, [simpleStock]);
 
-    async function loadSimpleStocks(){
+    async function loadSimpleStocks() {
         const simpleStock = (await parseStocks(stocks)).filter((val) => val.swipe == "right");
         await setSimpleStock(simpleStock);
     }
-    useEffect(()=>{
+    useEffect(() => {
         loadSimpleStocks();
-    },[stocks]);
+    }, [stocks]);
 
     //Function to export report and .xlsx file
     const exportReport = async () => {
@@ -65,16 +67,19 @@ const Report = () => {
             <Text className="reportTitle"><b>Your Stock Report</b></Text>
             <Text size="lg" c="dimmed">Based on your preferences and swipes, we generated a list of stocks you might be interested in.*</Text>
             <div className="reportButtonRow">
-            <Button size="md" color="indigo.6" mt="md" radius="md" mb="xl" onClick={exportReport}>
-                Download (.xlsx)
-            </Button>
-            <Button size="md" color="indigo.6" mt="md" radius="md" component="a" href="/" mb="xl">
-                Return to Home
-            </Button>
+                <Button size="md" color="indigo.6" mt="md" radius="md" mb="xl" onClick={exportReport}>
+                    Download (.xlsx)
+                </Button>
+                <Button size="md" color="indigo.6" mt="md" radius="md" component="a" href="/" mb="xl" onClick={(event) => {
+                    event.preventDefault();
+                    router.push("/stocks");
+                }}>
+                    Return to Stocks
+                </Button>
             </div>
             <div className="report">
-                {simpleStock.length > 0 ? (simpleStock.slice(0, results).map((stock:any, index:number) => (
-                    <MiniStock key={index} name={stock.name} ticker={stock.ticker} data={stock.graph} amount={(String)(Math.round((amounts[stock.ticker] || amounts[index]) * investment * 100)/100)}/>
+                {simpleStock.length > 0 ? (simpleStock.slice(0, results).map((stock: any, index: number) => (
+                    <MiniStock key={index} name={stock.name} ticker={stock.ticker} data={stock.graph} amount={(String)(Math.round((amounts[stock.ticker] || amounts[index]) * investment * 100) / 100)} />
                 ))) : (
                     <Text c="dimmed"><i>You currently don't have any stocks.</i></Text>
                 )}
