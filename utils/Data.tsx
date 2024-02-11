@@ -6,7 +6,6 @@ interface PreferencesProps {
     risk: string[];
     age: string[];
     size: string[];
-    dividends: boolean;
 }
 
 interface GraphPoint {

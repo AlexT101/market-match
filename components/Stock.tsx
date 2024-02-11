@@ -1,7 +1,7 @@
 import '../styles/index.css';
-import { Card, Text, Badge, Button, Group, Tabs, Textarea, ScrollArea, HoverCard } from '@mantine/core';
+import { Card, Text, Badge, Button, Group, Tabs, Textarea, ScrollArea, HoverCard, LoadingOverlay } from '@mantine/core';
 import { AreaChart } from '@mantine/charts';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { IconChartHistogram, IconInfoCircle, IconMessage } from '@tabler/icons-react';
 import { getDataPoints, getBounds } from '../utils/Utils';
 
@@ -108,6 +108,7 @@ const Stock = ({ name, ticker, description, sector, marketcap, pe, volume, open,
 
     return (
         <Card id="stock" className="stock" shadow="sm" padding="lg" radius="md" withBorder>
+            <LoadingOverlay visible={name == null || name == ""} zIndex={1000} overlayProps={{ radius: "sm", blur: 2 }} loaderProps={{color:"indigo.6"}}/>
             <Group justify="space-between">
                 <Text fw={800} size="xl">{name}</Text>
                 <Badge color="indigo.6" size="xl">{ticker}</Badge>
@@ -137,6 +138,7 @@ const Stock = ({ name, ticker, description, sector, marketcap, pe, volume, open,
                                 { name: 'Price', color: 'indigo.6' },
                             ]}
                             curveType="linear"
+                            valueFormatter={((value: number) => "$"+(Math.round(value*100)/100).toString())}
                         />
                     </Group>
                 ) : opened == 1 ? (
@@ -209,7 +211,7 @@ const Stock = ({ name, ticker, description, sector, marketcap, pe, volume, open,
 
             <ScrollArea h={150}>
                 <Text size="md">
-                    {description}
+                    {description == null || description == "" ? "We are currently trying to load a stock recommendation based on your preferences." : description}
                 </Text>
             </ScrollArea>
 

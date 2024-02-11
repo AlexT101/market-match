@@ -146,6 +146,7 @@
 .stockSection.chart {
     padding-top: 20px;
     padding-right: 20px;
+    padding-left: 15px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -279,6 +280,20 @@
     align-items: center;
     justify-content: flex-start;
     gap: 12px;
+    animation: 0.35s slideLeft;
+}
+
+
+@keyframes slideLeft {
+    0% {
+        transform: translateX(350px);
+        opacity: 0;
+    }
+
+    100% {
+        transform:translateX(0px);
+        opacity: 1;
+    }
 }
 
 .historyCard.left {

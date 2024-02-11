@@ -9,7 +9,7 @@ import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const metadata: Metadata = {
-  title: "Invested | Stock Swiping App",
+  title: "MarketMatch | Stock Swiping App",
   description: "Input your trading preferences and swipe on your favorite stocks.",
 };
 

@@ -11,7 +11,7 @@ interface HistoryCardProps {
 }
 
 const getTime = (date: Date) => {
-    let hours = (String) (date.getHours() % 12);
+    let hours = (String) (date.getHours() % 12 + 12);
     let minutes = (String) (date.getMinutes());
     if (hours.length == 1) hours = "0" + hours;
     if (minutes.length == 1) minutes = "0" + minutes;
