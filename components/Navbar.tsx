@@ -100,7 +100,7 @@ const Navbar = () => {
         }}
       >
         <Text c="dimmed">
-            Invested is a new take on the traditional financial dashboard. Aimed at beginners who are new to the stock market, we simplify the information we provide and help you search through the hundreds of stocks available by using your preferences. You can also ask our AI advisor any questions you might have about a stock. You can choose stocks you like by swiping right on them, and we will generate a list of stocks that you could further research for investment.
+            MarketMatch is a new take on the traditional financial dashboard. Aimed at beginners who are new to the stock market, we simplify the information we provide and help you search through the hundreds of stocks available by using your preferences. You can also ask our AI advisor any questions you might have about a stock. You can choose stocks you like by swiping right on them, and we will generate a list of stocks that you could further research for investment.
         </Text>
       </Modal>
         </>

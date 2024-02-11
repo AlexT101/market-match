@@ -5,6 +5,7 @@ import { Card, Text, TextInput, Select, MultiSelect, Checkbox, Button, Overlay }
 import { useForm } from '@mantine/form';
 import { useState } from 'react';
 import { useStore } from '../utils/Data';
+import { sendPreferences } from '../utils/Utils';
 import { useEffect } from 'react';
 import Icon from '../public/icon.svg';
 
@@ -30,13 +31,14 @@ const Preferences = () => {
     const submitPreferences = () => {
         setSubmitted(true);
         setPreferences(form.values);
+        sendPreferences(form.values);
     }
 
     return (
         <main className="preferenceContainer">
             <div className="backgroundGradient"> 
             <img className="appIcon" src={Icon.src} width={48} height={48}/>
-            <Text className="backgroundTitle">Invested</Text>
+            <Text className="backgroundTitle">MarketMatch</Text>
             <Text className="backgroundSubtitle">Input your preferences, swipe left or right on some of the market's most popular investments, and get a curated list of stocks to research with our online web dashboard.</Text>
             </div>
             <Card className="preferenceBox" shadow="sm" padding="xl" radius="md" withBorder>

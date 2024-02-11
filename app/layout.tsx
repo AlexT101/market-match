@@ -8,7 +8,7 @@ import Navbar from '../components/Navbar';
 
 export const metadata: Metadata = {
   title: "Invested | Stock Swiping App",
-  description: "Input your preferences and swipe on your favorite stocks.",
+  description: "Input your trading preferences and swipe on your favorite stocks.",
 };
 
 export default function RootLayout({

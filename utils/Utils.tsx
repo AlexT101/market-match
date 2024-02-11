@@ -617,8 +617,17 @@ const sampleStock = {
    "description_data": "motorola solutions, inc. (www.motorolasolutions.com), provides mission-critical communications products and services to public safety and commercial customers around the world. our innovations, products, and services play essential roles in people's lives.\n we help firefighters see around buildings and police officers see around street corners.\n we provide the situational awareness first responders need when a moment brings catastrophe.\n we do this by connecting them to seamless communication networks, applications and services, by providing them with real-time information, and by arming them with intuitive, nearly indestructible handheld devices. motorola solutions helps people be their best in the moments that matter. learn more at www.motorolasolutions.com."
 }
 
-export async function getStock() {
+export async function getStock(ticker: string) {
+    if (ticker != undefined){
+
+    }else{
+        
+    }
     return sampleStock;
+}
+
+export async function sendPreferences(preferences: any){
+    console.log(preferences);
 }
 
 export async function parseStocks(stocks: any) {
