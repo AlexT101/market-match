@@ -98,6 +98,10 @@
     font-size: 32px;
 }
 
+.badge {
+    min-width: 84px;
+}
+
 .stockSection {
     border-top: 1px solid rgb(66, 66, 66);
     border-bottom: 1px solid rgb(66, 66, 66);

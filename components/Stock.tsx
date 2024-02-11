@@ -88,11 +88,11 @@ const Stock = ({ name, ticker, description, sector, marketcap, pe, volume, open,
     return (
         <Card id="stock" className="stock" shadow="sm" padding="lg" radius="md" withBorder>
             <LoadingOverlay visible={name == null || name == ""} zIndex={1000} overlayProps={{ radius: "sm", blur: 2 }} loaderProps={{ color: "indigo.6" }} />
-            <Group justify="space-between">
+            <Group justify="space-between" wrap="nowrap">
                 <Text fw={800} size="xl">{name}</Text>
                 <HoverCard width={200} shadow="md" position="bottom" withArrow arrowSize={12}>
                     <HoverCard.Target>
-                        <Badge color="indigo.6" size="xl">{ticker}</Badge>
+                        <Badge color="indigo.6" size="xl" className="badge">{ticker}</Badge>
                     </HoverCard.Target>
                     <HoverCard.Dropdown>
                             <Text size="md">
