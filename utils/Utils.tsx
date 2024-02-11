@@ -618,7 +618,7 @@ const sampleStock = {
 }
 
 export async function getStock(ticker: string) {
-    if (ticker != undefined){
+    if (ticker != null && ticker != ""){
 
     }else{
         

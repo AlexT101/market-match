@@ -14,7 +14,7 @@ export default function Home() {
   const { currentStock, setCurrentStock, addStock, clearStocks, stocks } = useStore();
 
   async function fetchNewStock() {
-    const stock = await getStock();
+    const stock = await getStock("");
       await setCurrentStock(stock);
   }
 
