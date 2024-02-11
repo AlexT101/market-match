@@ -8,8 +8,10 @@ import { parseStocks } from 'utils/Utils';
 
 const History = () => {
     const { stocks } = useStore();
-    const [simpleStock, setSimpleStock] = useState<any>([]);
 
+    //Load displayable stocks
+    const [simpleStock, setSimpleStock] = useState<any>([]);
+    
     async function loadSimpleStocks(){
         const simpleStock = (await parseStocks(stocks));
         await setSimpleStock(simpleStock);

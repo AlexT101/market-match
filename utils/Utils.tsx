@@ -1,3 +1,4 @@
+//Post request to OpenAI GPT model
 import OpenAI from 'openai';
 
 const openai = new OpenAI({
@@ -15,6 +16,7 @@ export async function POST(message: string) {
     return chatCompletion;
 }
 
+//Returns data points to be used for rendering graph
 export function getDataPoints(graph: any) {
     let dataPoints = [];
     for (let key in graph) {
@@ -23,6 +25,7 @@ export function getDataPoints(graph: any) {
     return dataPoints;
 }
 
+//Returns data array to be used for rendering mini graph
 export function getDataArray(graph: any) {
     let dataPoints = [];
     for (let key in graph) {
@@ -31,6 +34,7 @@ export function getDataArray(graph: any) {
     return dataPoints;
 }
 
+//Get biggest and smallest element to be used for calculating graph bounds
 export function getBounds(data: any) {
     let smallest = data[0].Price;
     let biggest = data[0].Price;
@@ -45,9 +49,10 @@ export function getBounds(data: any) {
     return [smallest, biggest];
 }
 
+//Get amounts to invest per stock
 export async function getAmounts(size: number, risk: string) {
     let riskType = risk == "Low Risk (Conservative)" ? "low" : risk == "Medium Risk (Mix)" ? "medium" : "high";
-    const response = await fetch("http://13.58.138.38:8000//RecommendedPortfolio/" + riskType);
+    const response = await fetch("http://13.58.138.38:8000/RecommendedPortfolio/" + riskType);
     const data = await response.json();
     let result = [];
     for (let i = 0; i < size; i++) {
@@ -56,6 +61,59 @@ export async function getAmounts(size: number, risk: string) {
     return result;
 }
 
+//Get the next stock
+export async function getStock(ticker: string, swipe: boolean) {
+    let append = "";
+    if (ticker != null && ticker != "") {
+        append = ticker + "/" + swipe;
+    }
+    const response = await fetch("http://13.58.138.38:8000/get_next_ticker/" + append);
+    const data = await response.json();
+    console.log(data);
+    return data;
+    //return sampleStock;
+}
+
+
+//Send user preferences to server
+export async function sendPreferences(preferences: any) {
+    let risk = preferences.risk == "Low Risk (Conservative)" ? 2 : preferences.risk == "Medium Risk (Mix)" ? 5 : 8;
+    let sectors = "";
+    for (let i = 0; i < preferences.sector.length; i++) {
+        sectors += preferences.sector[i];
+        if (i < preferences.sector.length - 1) {
+            sectors += ",";
+        }
+    }
+    const response = await fetch("http://13.58.138.38:8000/create_account/" + risk + "/" + sectors + "/" + preferences.age + "/" + preferences.size);
+
+    console.log(preferences);
+}
+
+//Send request to GPT model with a prompt and the user question
+export async function getResponse(ticker:string, name: string, question: string) {
+    const prompt = "You are going to provide helpful answers to questions a beginning stock investor might have. The ticker for the current company stock is " + ticker + " and the company name is " + name + ". Do not provide financial advice. Here is the question: "
+    const response = await POST(prompt + question);
+    return response.choices[0].message.content;
+}
+
+//Get the important stock data used in the UI
+export async function parseStocks(stocks: any) {
+    var newStockData = [];
+    for (let i = 0; i < stocks.length; i++) {
+        newStockData.push({
+            name: stocks[i].name_data,
+            ticker: stocks[i].ticker,
+            swipe: stocks[i].swipe,
+            time: stocks[i].time,
+            price: stocks[i].marketOpen_data,
+            graph: getDataArray(stocks[i].graph_data.six_month),
+        })
+    }
+    return newStockData;
+}
+
+//Sample stock to test with if the backend is down
 const sampleStock = {
     "ticker": "MSI",
     "graph_data": {
@@ -643,51 +701,4 @@ const sampleStock = {
     "size_data": 19521,
     "sector_data": "Manufacturing",
     "description_data": "motorola solutions, inc. (www.motorolasolutions.com), provides mission-critical communications products and services to public safety and commercial customers around the world. our innovations, products, and services play essential roles in people's lives.\n we help firefighters see around buildings and police officers see around street corners.\n we provide the situational awareness first responders need when a moment brings catastrophe.\n we do this by connecting them to seamless communication networks, applications and services, by providing them with real-time information, and by arming them with intuitive, nearly indestructible handheld devices. motorola solutions helps people be their best in the moments that matter. learn more at www.motorolasolutions.com."
-}
-
-export async function getStock(ticker: string, swipe: boolean) {
-    let append = "";
-    if (ticker != null && ticker != "") {
-        append = ticker + "/" + swipe;
-    }
-    const response = await fetch("http://13.58.138.38:8000/get_next_ticker/" + append);
-    const data = await response.json();
-    console.log(data);
-    return data;
-    //return sampleStock;
-}
-
-export async function sendPreferences(preferences: any) {
-    let risk = preferences.risk == "Low Risk (Conservative)" ? 2 : preferences.risk == "Medium Risk (Mix)" ? 5 : 8;
-    let sectors = "";
-    for (let i = 0; i < preferences.sector.length; i++) {
-        sectors += preferences.sector[i];
-        if (i < preferences.sector.length - 1) {
-            sectors += ",";
-        }
-    }
-    const response = await fetch("http://13.58.138.38:8000/create_account/" + risk + "/" + sectors + "/" + preferences.age + "/" + preferences.size);
-
-    console.log(preferences);
-}
-
-export async function getResponse(ticker:string, name: string, question: string) {
-    const prompt = "You are going to provide helpful answers to questions a beginning stock investor might have. The ticker for the current company stock is " + ticker + " and the company name is " + name + ". Do not provide financial advice. Here is the question: "
-    const response = await POST(prompt + question);
-    return response.choices[0].message.content;
-}
-
-export async function parseStocks(stocks: any) {
-    var newStockData = [];
-    for (let i = 0; i < stocks.length; i++) {
-        newStockData.push({
-            name: stocks[i].name_data,
-            ticker: stocks[i].ticker,
-            swipe: stocks[i].swipe,
-            time: stocks[i].time,
-            price: stocks[i].marketOpen_data,
-            graph: getDataArray(stocks[i].graph_data.six_month),
-        })
-    }
-    return newStockData;
 }

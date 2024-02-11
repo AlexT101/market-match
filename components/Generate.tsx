@@ -7,6 +7,7 @@ import { useForm } from '@mantine/form';
 const Generate = () => {
     const { setResults, setInvestment } = useStore();
 
+    //Form values for generate type
     const form = useForm({
         initialValues: {
             count: '5',
@@ -14,10 +15,11 @@ const Generate = () => {
         }
     });
 
+    //Update store based on form submit
     useEffect(() => {
         setResults(parseInt(form.values.count));
         setInvestment(form.values.invest);
-    }, [form.values.count]);
+    }, [form.values]);
 
     return (
         <Card className="box generate" shadow="sm" padding="lg" radius="md" withBorder>

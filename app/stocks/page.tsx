@@ -13,16 +13,13 @@ import { useStore } from 'utils/Data';
 export default function Home() {
   const { currentStock, setCurrentStock, addStock, clearCurrentStock, clearStocks, stocks } = useStore();
 
-  useEffect(() => {
-    console.log(currentStock);
-    console.log(currentStock.ticker);
-  }, []);
-
+  //Function to get the very first stock
   async function fetchFirstStock() {
     const stock = await getStock("", false);
     await setCurrentStock(stock);
   }
 
+  //Function to get a new stock based on the swipe result of the previous
   async function fetchNewStock(swipe: boolean) {
     const ticker = await currentStock.ticker;
     clearCurrentStock();
@@ -30,39 +27,49 @@ export default function Home() {
     await setCurrentStock(stock);
   }
 
+  //Load the first stock
   async function loadStock() {
     const cur = await currentStock;
     if (cur == null || cur.ticker == "") {
       fetchFirstStock();
-    } else {
-      setCurrentStock(cur);
     }
   }
-
   useEffect(() => {
     loadStock();
   }, [])
 
 
+  //Event listener for left and right arrow keys to be used as swipes
   useEffect(() => {
     if (typeof window != undefined) {
       document.onkeydown = arrowChecker;
     }
   }, [currentStock]);
 
+  //Function to check if the left or right arrow keys are pressed
   function arrowChecker(e: any) {
     e = e || window.event;
+
+    //Make sure current stock isn't empty
     if (currentStock.ticker != null && currentStock.ticker != "") {
+
+      //Get left key press
       if (e.keyCode == '37') {
         swipeLeft();
+
+        //Animate left button
         var element = document.getElementById("left");
         element?.classList.remove("lighten");
         setTimeout(() => {
           element?.classList.add("lighten");
         }, 0);
       }
+
+      //Get right key press
       else if (e.keyCode == '39') {
         swipeRight();
+
+        //Animate right button
         var element = document.getElementById("right");
         element?.classList.remove("lighten");
         setTimeout(() => {
@@ -72,6 +79,7 @@ export default function Home() {
     }
   }
 
+  //Reject current stock
   async function swipeLeft() {
     if (!stocks.find((stock) => stock.ticker == currentStock.ticker)) {
       currentStock.swipe = "left";
@@ -79,6 +87,8 @@ export default function Home() {
       addStock(currentStock);
       fetchNewStock(false);
     }
+
+    //Tilt stock left
     var element = document.getElementById("stock");
     element?.classList.remove("tiltLeft");
     element?.classList.remove("tiltRight");
@@ -87,6 +97,7 @@ export default function Home() {
     }, 0);
   }
 
+  //Accept current stock
   async function swipeRight() {
     if (!stocks.find((stock) => stock.ticker == currentStock.ticker)) {
       currentStock.swipe = "right";
@@ -94,6 +105,8 @@ export default function Home() {
       addStock(currentStock);
       fetchNewStock(true);
     }
+
+    //Tilt right
     var element = document.getElementById("stock");
     element?.classList.remove("tiltLeft");
     element?.classList.remove("tiltRight");

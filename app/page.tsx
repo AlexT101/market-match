@@ -10,10 +10,13 @@ import Icon from '../public/icon.svg';
 
 const Preferences = () => {
 
-    const { preferences, setPreferences } = useStore();
+    //Set the preferences in the store
+    const { setPreferences } = useStore();
 
+    //Whether or not preferences submitted
     const [submitted, setSubmitted] = useState(false);
 
+    //Form values
     const form = useForm({
         initialValues: {
             sector: [],
@@ -23,6 +26,7 @@ const Preferences = () => {
         }
     });
 
+    //Function to submit preferences
     const submitPreferences = () => {
         setSubmitted(true);
         setPreferences(form.values);

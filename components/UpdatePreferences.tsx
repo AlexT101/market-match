@@ -1,5 +1,5 @@
 import '../styles/index.css';
-import { Card, Text, Button, Select } from '@mantine/core';
+import { Card, Text, Button } from '@mantine/core';
 
 const UpdatePreferences = () => {
     return (

@@ -10,6 +10,7 @@ interface HistoryCardProps {
     direction: string;
 }
 
+//Format the time correctly given date
 const getTime = (date: Date) => {
     let hours = (String) (date.getHours() % 12 + 12);
     let minutes = (String) (date.getMinutes());

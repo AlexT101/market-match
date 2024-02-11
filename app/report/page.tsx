@@ -8,40 +8,7 @@ import { useStore } from 'utils/Data';
 import { useState, useEffect } from 'react';
 import { parseStocks, getAmounts } from 'utils/Utils';
 
-
-const data = [
-    {
-        name: "Alphabet, Inc.",
-        ticker: "GOOG",
-        data: [10, 20, 40, 20, 40, 10, 50]
-    },
-    {
-        name: "Alphabet, Inc.",
-        ticker: "GOOG",
-        data: [10, 20, 40, 20, 40, 10, 50]
-    },
-    {
-        name: "Alphabet, Inc.",
-        ticker: "GOOG",
-        data: [10, 20, 40, 20, 40, 10, 50]
-    },
-    {
-        name: "Alphabet, Inc.",
-        ticker: "GOOG",
-        data: [10, 20, 40, 20, 40, 10, 50]
-    },
-    {
-        name: "Alphabet, Inc.",
-        ticker: "GOOG",
-        data: [10, 20, 40, 20, 40, 10, 50]
-    },
-    {
-        name: "Alphabet, Inc.",
-        ticker: "GOOG",
-        data: [10, 20, 40, 20, 40, 10, 50]
-    },
-];
-
+//Schema for exporting .xlsx file
 interface StockType {
     name: string,
     ticker: string,
@@ -69,10 +36,10 @@ const Report = () => {
     const [amounts, setAmounts] = useState<any>([]);
 
 
+    //Load data from store
     async function loadAmounts(){
         setAmounts(await getAmounts(results, preferences.risk));
     }
-
     useEffect(() => {
         loadAmounts();
     }, [simpleStock]);
@@ -81,13 +48,13 @@ const Report = () => {
         const simpleStock = (await parseStocks(stocks)).filter((val) => val.swipe == "right");
         await setSimpleStock(simpleStock);
     }
-
     useEffect(()=>{
         loadSimpleStocks();
     },[stocks]);
 
+    //Function to export report and .xlsx file
     const exportReport = async () => {
-        await writeXlsxFile(data, {
+        await writeXlsxFile(stocks, {
             schema,
             fileName: 'stockReport.xlsx'
         });

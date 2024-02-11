@@ -4,31 +4,8 @@ import { AreaChart } from '@mantine/charts';
 import { useState } from 'react';
 import { IconChartHistogram, IconInfoCircle, IconMessage } from '@tabler/icons-react';
 import { getDataPoints, getBounds, getResponse } from '../utils/Utils';
-import { useStore } from 'utils/Data';
 
-const data = [
-    {
-        date: 'Mar 22',
-        Price: 2890,
-    },
-    {
-        date: 'Mar 23',
-        Price: 2756,
-    },
-    {
-        date: 'Mar 24',
-        Price: 3322,
-    },
-    {
-        date: 'Mar 25',
-        Price: 3470,
-    },
-    {
-        date: 'Mar 26',
-        Price: 3129,
-    },
-];
-
+//Possible prompts for the user to use as inspiration in the AI chat
 const possiblePrompts = [
     "Does this stock pay dividends?",
     "When was this company founded?",
@@ -51,6 +28,7 @@ const possiblePrompts = [
     "What is the company's revenue?",
 ];
 
+//Get a random prompt
 const getPrompt = () => {
     return possiblePrompts[Math.floor(Math.random() * possiblePrompts.length)];
 }
@@ -71,7 +49,7 @@ interface StockProps {
 }
 
 const Stock = ({ name, ticker, description, sector, marketcap, pe, volume, open, close, size, graph, intraday }: StockProps) => {
-    const { currentStock } = useStore();
+    //Get the range of the graph based on the day range
     const getRange:any = () => {
         if (graph == null){
             return [];
@@ -100,7 +78,7 @@ const Stock = ({ name, ticker, description, sector, marketcap, pe, volume, open,
             setPrompt(getPrompt());
             setShowAnswer(false);
         } else {
-            setAnswer(await getResponse(currentStock.ticker, currentStock.name_data, question) || "No response could be provided. Please try again later.");
+            setAnswer(await getResponse(ticker, name, question) || "No response could be provided. Please try again later.");
             setQuestion("");
             setShowAnswer(true);
         }
