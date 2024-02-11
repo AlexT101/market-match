@@ -6,7 +6,6 @@ import { useForm } from '@mantine/form';
 import { useState } from 'react';
 import { useStore } from '../utils/Data';
 import { sendPreferences } from '../utils/Utils';
-import { useEffect } from 'react';
 import Icon from '../public/icon.svg';
 
 const Preferences = () => {

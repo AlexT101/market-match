@@ -29,6 +29,9 @@ interface State {
     stocks: any[]
     addStock: (by: any) => void
     clearStocks: () => void
+    results: number
+    setResults: (by: number) => void
+    clearCurrentStock: () => void
 }
 
 export const useStore = create<State>()(
@@ -40,7 +43,10 @@ export const useStore = create<State>()(
             setCurrentStock: (by) => set((state) => ({ currentStock: by })),
             stocks: [],
             addStock: (by) => set((state) => ({ stocks: [...state.stocks, by] })),
-            clearStocks: () => set((state) => ({ stocks: [] }))
+            clearStocks: () => set((state) => ({ stocks: [] })),
+            results: 5,
+            setResults: (by) => set((state) => ({ results: by })),
+            clearCurrentStock: () => set((state) => ({ currentStock: { name: '', ticker: '', sector: '', graph: [], description: '' } }))
         }),
         //{
        //     name: 'data-storage',

@@ -6,13 +6,14 @@ import { IconChevronLeft, IconChevronRight } from '@tabler/icons-react';
 
 interface ArrowProps {
     name: string,
-    onClick: () => void
+    onClick: () => void,
+    disabled: boolean
 }
 
-const Arrow = ({ name, onClick }: ArrowProps) => {
+const Arrow = ({ name, onClick, disabled }: ArrowProps) => {
     return (
         <Tooltip label={name == "left" ? "Reject Stock" : "Accept Stock"}>
-            <Button id={name} onClick={onClick} className="arrow">
+            <Button color="rgb(66,66,66)" id={name} onClick={onClick} className="arrow" disabled={disabled}>
                 {name == "left" ?
                     <IconChevronLeft size={36} className="arrowLeft" />
                     :

@@ -22,8 +22,8 @@ const History = () => {
     return (
         <ScrollArea className={"historyScroll" + ((simpleStock.length > 1) ? " fade" : "")}>
             <div className="historyContainer">
-                {simpleStock.reverse().map((item:any, index:number) => (
-                    <HistoryCard key={index} name={item.name} time={item.time} price={"$" + item.price} direction={item.swipe} />
+                {simpleStock.map((item:any) => (
+                    <HistoryCard key={item.ticker} name={item.name} time={item.time} price={"$" + item.price} direction={item.swipe} />
                 ))}
             </div>
         </ScrollArea>

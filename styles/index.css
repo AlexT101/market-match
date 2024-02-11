@@ -82,15 +82,15 @@
 
 @keyframes lightenAnim {
     0% {
-        background-color: rgb(46, 46, 46);
-    }
-
-    50% {
         background-color: rgb(66, 66, 66);
     }
 
-    100% {
+    50% {
         background-color: rgb(46, 46, 46);
+    }
+
+    100% {
+        background-color: rgb(66, 66, 66);
     }
 }
 
@@ -185,7 +185,6 @@
 }
 
 .arrow {
-    background-color: rgb(46, 46, 46);
     border: 1px solid rgb(66, 66, 66);
     border-radius: 50%;
     width: 64px;
@@ -196,9 +195,6 @@
     align-items: center;
 }
 
-.arrow:hover {
-    background-color: rgb(66, 66, 66);
-}
 
 .arrowLeft {
     padding-right: 3px;
@@ -254,10 +250,10 @@
 
 .historyContainer {
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     gap: 10px;
     align-items: flex-end;
-    justify-content: flex-end;
+    justify-content: flex-start;
     min-height: 380px;
     padding-right: 20px;
     padding-bottom: 20px;
