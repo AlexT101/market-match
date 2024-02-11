@@ -1,11 +1,11 @@
 import '../styles/index.css';
-import { Card, Text, Button, Select, TextInput } from '@mantine/core';
-import { useState, useEffect } from 'react';
+import { Card, Text, Button, Select } from '@mantine/core';
+import { useEffect } from 'react';
 import { useStore } from 'utils/Data';
 import { useForm } from '@mantine/form';
 
 const Generate = () => {
-    const { results, setResults, setInvestment } = useStore();
+    const { setResults, setInvestment } = useStore();
 
     const form = useForm({
         initialValues: {
