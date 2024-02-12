@@ -1,7 +1,7 @@
 import '../styles/index.css';
 import { Card, Text, Badge, Button, Group, Tabs, Textarea, ScrollArea, HoverCard, LoadingOverlay, Progress } from '@mantine/core';
 import { AreaChart } from '@mantine/charts';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { IconChartHistogram, IconInfoCircle, IconMessage } from '@tabler/icons-react';
 import { getDataPoints, getBounds, getResponse } from '../utils/Utils';
 
@@ -72,6 +72,16 @@ const Stock = ({ name, ticker, description, sector, marketcap, pe, volume, open,
     const [prompt, setPrompt] = useState(getPrompt()); //Example user prompt in the text area
     const [question, setQuestion] = useState(""); //User question for ai
     const [answer, setAnswer] = useState(""); //Ai answer to user question
+
+    useEffect(() => {
+        if (name == null || name == ""){
+            setOpened(0);
+            setShowAnswer(false);
+            setPrompt(getPrompt());
+            setQuestion("");
+            setAnswer("");
+        }
+    }, [name]);
 
     //Either exit out of the answer box or send the question
     async function sendQuestion() {

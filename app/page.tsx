@@ -33,16 +33,16 @@ const Preferences = () => {
     const submitPreferences = () => {
         setSubmitted(true);
         if (form.values.sector.length == 0){
-            form.setFieldValue('sector', ['Manufacturing', 'Information'] as any);   
+            form.values.sector = ['Manufacturing', 'Information'] as any;   
         }
         if (form.values.risk == "") {
-            form.setFieldValue('risk', 'Low Risk (Conservative)');
+            form.values.risk = 'Low Risk (Conservative)';
         }
         if (form.values.age == "") {
-            form.setFieldValue('age', 'Any');
+            form.values.age = 'Any';
         }
         if (form.values.size == "") {
-            form.setFieldValue('size', 'Large');
+            form.values.size = 'Large';
         }
         setPreferences(form.values);
         sendPreferences(form.values);
