@@ -6,11 +6,6 @@ Backend: https://github.com/Benler123/HacklyticsBackend
 
 https://github.com/AlexT101/market-match/assets/16299285/af5b6804-5bc0-45a3-acbb-078bcd0c935b
 
-<div>
-<img src="./public/page1.png" width="49%">
-<img src="./public/page2.png" width="49%">
-</div>
-
 ## The Problem: A Barrier to Entry
 
 Investing in stocks is a cornerstone of financial growth, yet a staggering 58% of individuals under 30 refrain from engaging with the stock market at all. The primary barrier? Overly technical terminology, complicated data, and the general belief that investing should be left to the experts, leaving beginners unsure of how to choose the best stocks for them.
@@ -22,6 +17,11 @@ Our free, web and mobile-friendy dashboard is uniquely targeted to beginners. Us
 Our platform prioritizes a teaching focus through a personalized chatbot at the user’s disposal at any time. In addition to explaining technical investing vocabulary, the chatbot can offer clear explanations for subtle parameters or trends, as well as clarifying confusing terminology that beginners might struggle with.
 
 Additionally, we integrated sentiment analysis to offer users deeper insights into specific stocks. By analyzing the most recent financial news articles related to a company, our model assigns a sentiment score ranging from 0 to 100, where lower scores indicate a negative sentiment and higher scores indicate a positive sentiment. By quantifying sentiment in this manner, users can quickly gauge market sentiment and potentially align their personal investment strategies with prevailing opinions in the financial news landscape.
+
+<div>
+<img src="./public/page1.png" width="49%">
+<img src="./public/page2.png" width="49%">
+</div>
 
 ## The Approach: Machine Learning and Data Visualization
 
