@@ -7,8 +7,8 @@ Backend: https://github.com/Benler123/HacklyticsBackend
 https://github.com/AlexT101/market-match/assets/16299285/af5b6804-5bc0-45a3-acbb-078bcd0c935b
 
 <div>
-<img src="./public/page2.png" width="49%">
 <img src="./public/page1.png" width="49%">
+<img src="./public/page2.png" width="49%">
 </div>
 
 ## The Problem: A Barrier to Entry
