@@ -1,14 +1,10 @@
 # MarketMatch
 
-Swipe right on financial success - let our AI play matchmaker with stocks tailored just for you, making investing easy and rewarding with gamified asset allocation. Get ready to level up your portfolio!
+Swipe right on financial success - let our AI play matchmaker with stocks tailored just for you, making investing easy and rewarding with gamified asset allocation. Get ready to level up your portfolio with MarketMatch, built as a team project for the Hacklytics 2024 hackathon.
 
 Backend: https://github.com/Benler123/HacklyticsBackend
 
-<img src="./public/page2.png" width="98%">
-<div>
-<img src="./public/page1.png" width="49%">
-<img src="./public/page3.png" width="49%">
-</div>
+https://github.com/AlexT101/market-match/assets/16299285/af5b6804-5bc0-45a3-acbb-078bcd0c935b
 
 ## The Problem: A Barrier to Entry
 
@@ -21,6 +17,11 @@ Our free, web and mobile-friendy dashboard is uniquely targeted to beginners. Us
 Our platform prioritizes a teaching focus through a personalized chatbot at the user’s disposal at any time. In addition to explaining technical investing vocabulary, the chatbot can offer clear explanations for subtle parameters or trends, as well as clarifying confusing terminology that beginners might struggle with.
 
 Additionally, we integrated sentiment analysis to offer users deeper insights into specific stocks. By analyzing the most recent financial news articles related to a company, our model assigns a sentiment score ranging from 0 to 100, where lower scores indicate a negative sentiment and higher scores indicate a positive sentiment. By quantifying sentiment in this manner, users can quickly gauge market sentiment and potentially align their personal investment strategies with prevailing opinions in the financial news landscape.
+
+<div>
+<img src="./public/page1.png" width="49%">
+<img src="./public/page2.png" width="49%">
+</div>
 
 ## The Approach: Machine Learning and Data Visualization
 
